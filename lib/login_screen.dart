@@ -92,8 +92,9 @@ class _UserLoginPageState extends State<UserLoginPage> {
               GestureDetector(
                 child: Image.asset('assets/image/button/login_btn.png'),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                      (route) => false);
                 },
               ),
               SizedBox(

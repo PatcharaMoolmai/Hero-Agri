@@ -3,6 +3,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hero_agri/card/tile_card.dart';
 
 // Package import
 import 'package:hero_agri/login_screen.dart';
@@ -99,12 +100,16 @@ class _AppIntroPageState extends State<AppIntroPage> {
         GestureDetector(
             child: _currentPosition == 1.0
                 ? Image.asset('assets/image/button/start_btn.png')
-                : SizedBox(height: 70,),
+                : SizedBox(
+                    height: 70,
+                  ),
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => UserLoginPage()));
             }),
-            SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
