@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
 class NotificationPage extends StatefulWidget {
-  const NotificationPage({ Key key }) : super(key: key);
+  const NotificationPage({Key key}) : super(key: key);
 
   @override
   _NotificationPageState createState() => _NotificationPageState();
@@ -15,18 +15,12 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('การแจ้งเตือน'),
-          ],
-        ),
-        backgroundColor: Colors.green,
-        // actions: <Widget>[
+        title: Text('การแจ้งเตือน'),
+        backgroundColor: Color(0xFF57BD37),
+        centerTitle: true, // actions: <Widget>[
         //   IconButton(icon: Icon(Icons.notifications), onPressed: (){print('alert notification');})
         // ],
       ),
-      
     );
   }
 }

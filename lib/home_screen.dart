@@ -19,7 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Color appBarGreen = const Color.fromARGB(87, 189, 55, 1);
   void _onItemTapped(int index) {
     setState(() {
       HomePage._selectedIndex = index;
@@ -94,7 +93,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                   GestureDetector(
                     child: buildAgriNews(),
-                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => AgroNewsPage()));},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AgroNewsPage()));
+                    },
                   ),
                   SizedBox(
                     height: 5,
@@ -144,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                         // onTap: (final int index) async {
-                        //   switch(index){ 
+                        //   switch(index){
                         //     case 0: _onItemTapped;
                         //     case 1:
                         //     case 2:
@@ -163,7 +167,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildNotification() {
     return Row(
-      children: [
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
@@ -221,7 +226,7 @@ class _HomePageState extends State<HomePage> {
               aspectRatio: 2.0,
               enlargeCenterPage: true,
               enableInfiniteScroll: false,
-              initialPage: 2,
+              // initialPage: 1,
               // autoPlay: true,
             ),
             items: [1, 2, 3, 4, 5].map((i) {
@@ -251,6 +256,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       height: 150,
       child: TileCard(
+        padding: EdgeInsets.all(20),
         child: Text('หน้าการจัดการแปลงเกษตร',
             style: TextStyle(
                 fontFamily: 'Anakotmai',
@@ -278,7 +284,7 @@ class _HomePageState extends State<HomePage> {
               aspectRatio: 2.0,
               enlargeCenterPage: true,
               enableInfiniteScroll: false,
-              initialPage: 2,
+              // initialPage: 1,
               // autoPlay: true,
             ),
             items: [1, 2, 3, 4, 5].map((i) {
@@ -322,7 +328,7 @@ class _HomePageState extends State<HomePage> {
               aspectRatio: 2.0,
               enlargeCenterPage: true,
               enableInfiniteScroll: false,
-              initialPage: 2,
+              // initialPage: 1,
               // autoPlay: true,
             ),
             items: [1, 2, 3, 4, 5].map((i) {
@@ -332,12 +338,15 @@ class _HomePageState extends State<HomePage> {
                       // width: MediaQuery.of(context).size.width,
                       // margin: EdgeInsets.symmetric(horizontal: 5.0),
                       // decoration: BoxDecoration(color: Colors.amber),
-                      child: Container(
-                    // width: 50,
-                    child: TileCard(
-                      child: Text('ข่าวสารแอปพลิเคชัน'),
-                      padding: EdgeInsets.all(2),
+                      child: TileCard(
+                        color: Colors.lightGreen[400],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('ข่าวสารแอปพลิเคชัน'),
+                      ],
                     ),
+                    padding: EdgeInsets.all(2),
                   ));
                 },
               );
@@ -366,7 +375,7 @@ class _HomePageState extends State<HomePage> {
               aspectRatio: 2.0,
               enlargeCenterPage: true,
               enableInfiniteScroll: false,
-              initialPage: 2,
+              // initialPage: 1,
               // autoPlay: true,
             ),
             items: [1, 2, 3, 4, 5].map((i) {

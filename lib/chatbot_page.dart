@@ -15,13 +15,9 @@ class _ChatbotPageState extends State<ChatbotPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('ผู้ช่วยอัจฉริยะ'),
-          ],
-        ),
-        backgroundColor: Colors.green,
+        title: Text('ผู้ช่วยอัจฉริยะ'),
+        backgroundColor: Color(0xFF57BD37),
+        centerTitle: true,
         // actions: <Widget>[
         //   IconButton(icon: Icon(Icons.notifications), onPressed: (){print('alert notification');})
         // ],

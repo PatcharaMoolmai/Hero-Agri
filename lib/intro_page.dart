@@ -35,6 +35,8 @@ class _AppIntroPageState extends State<AppIntroPage> {
     if (_currentPosition > 1) {
       _currentPosition = 1.0;
     }
+    final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -54,22 +56,28 @@ class _AppIntroPageState extends State<AppIntroPage> {
                 child: _currentPosition == 0.0 ? PageOne() : PageTwo(),
                 // onHorizontalDragEnd: print('a'),
               ),
-              // Progress Bar
-              new DotsIndicator(
-                dotsCount: _totalDots,
-                position: _currentPosition,
-                decorator: DotsDecorator(activeColor: Colors.amber[400]),
-                onTap: (position) {
-                  setState(() => _currentPosition = position);
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              startButton(),
-              SizedBox(
-                height: 40,
-              ),
+              Align(
+                child: Column(
+                  children: [
+                    // Progress Bar
+                    new DotsIndicator(
+                      dotsCount: _totalDots,
+                      position: _currentPosition,
+                      decorator: DotsDecorator(activeColor: Colors.amber[400]),
+                      onTap: (position) {
+                        setState(() => _currentPosition = position);
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    startButton(),
+                    SizedBox(
+                      height: 40,
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
