@@ -1,9 +1,12 @@
-# hero_agri
+# Application Hero Agri
 
 - หน้าจอข่าวสาร(hightlight) สามารถเข้าไปทดสอบ mockup ได้
 - icon button (topleft topright) สามารถเข้าไปทดสอบ mockup ได้
 - ขาด card design ในหลายๆส่วน (กำลังดำเนินการ)
-## Getting Started
+- หน้า Application Introduction
+- main menu
+
+## Getting Started (About Flutter)
 
 This project is a starting point for a Flutter application.
 
