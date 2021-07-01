@@ -74,8 +74,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    // hintText: 'What do people call you?',
-                    labelText: 'ชื่อ-นามสกุล',
+                    hintText: 'ชื่อ-นามสกุล',
                     filled: true,
                     fillColor: Colors.white,
                     labelStyle: TextStyle(
@@ -90,8 +89,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    // hintText: 'What do people call you?',
-                    labelText: 'เบอร์โทรศัพท์',
+                    hintText: 'เบอร์โทรศัพท์',
                     filled: true,
                     fillColor: Colors.white,
                     labelStyle: TextStyle(

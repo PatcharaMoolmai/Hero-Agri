@@ -4,112 +4,62 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+
 // Project import
 import 'agri_news/agro_news_page.dart';
+import 'agro_plant_page.dart';
 import 'card/footer_navigator.dart';
 import 'card/tile_card.dart';
-import 'package:hero_agri/chatbot_page.dart';
-import 'package:hero_agri/notification_page.dart';
+import 'chatbot_page.dart';
+import 'notification_page.dart';
+import 'plot_area.dart';
+import 'setting_page.dart';
+import 'marketplace/marketplace_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
-  static int _selectedIndex = 0;
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
   void _onItemTapped(int index) {
+    // switch (index) {
+    //   // case 0:
+    //   case 1:
+    //     Navigator.push(
+    //         context, MaterialPageRoute(builder: (context) => PlotAreaPage()));
+    //     break;
+    //   // case 2:
+    //   // case 3:
+    //   case 4:
+    //     Navigator.push(
+    //         context, MaterialPageRoute(builder: (context) => SettingPage()));
+    //     break;
+    // }
     setState(() {
-      HomePage._selectedIndex = index;
+      _selectedIndex = index;
     });
   }
 
 // Width, height aren't flexible rn
   @override
   Widget build(BuildContext context) {
+
+    // Linking Page to change bottom widget
+    List<Widget> _widgertOption = <Widget>[
+      homePage(),
+      PlotAreaPage(),
+      MarketplacePage(),
+      AgroPlantPage(),
+      SettingPage()
+    ];
     return Scaffold(
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                child: IconButton(
-                    icon: Icon(Icons.file_copy),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ChatbotPage()));
-                      print('alert chatbot');
-                    }),
-              ),
-              // Text('Hero Agri logo'),
-              Image.asset(
-                'assets/image/logo.png',
-                height: 50,
-              ),
-              Container(
-                child: IconButton(
-                    icon: Icon(Icons.notifications),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NotificationPage()));
-                      print('alert notification');
-                    }),
-              ),
-            ],
-          ),
-          backgroundColor: Color(0xFF57BD37),
-          // actions: <Widget>[
-          //   IconButton(icon: Icon(Icons.notifications), onPressed: (){print('alert notification');})
-          // ],
-        ),
         body: Stack(
           children: <Widget>[
-            Container(
-              child: ListView(
-                children: <Widget>[
-                  SizedBox(
-                    height: 20,
-                  ),
-                  buildNotification(),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  buildPlotLocation(),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  manageActivity(),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  manageMyPlot(),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  GestureDetector(
-                    child: buildAgriNews(),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AgroNewsPage()));
-                    },
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  adsPromotion(),
-                  SizedBox(
-                    height: 70,
-                  ),
-                ],
-              ),
-            ),
+            _widgertOption.elementAt(_selectedIndex),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
@@ -118,13 +68,15 @@ class _HomePageState extends State<HomePage> {
                     data: Theme.of(context)
                         .copyWith(canvasColor: Colors.transparent),
                     child: FooterTileCard(
+                      insets: EdgeInsets.all(0),
+                      padding: EdgeInsets.all(9),
                       child: BottomNavigationBar(
                         elevation: 0,
                         showSelectedLabels: false,
                         showUnselectedLabels: false,
                         selectedItemColor: Colors.green,
                         onTap: _onItemTapped,
-                        currentIndex: HomePage._selectedIndex,
+                        currentIndex: _selectedIndex,
                         items: const <BottomNavigationBarItem>[
                           BottomNavigationBarItem(
                             icon: Icon(Icons.home),
@@ -147,15 +99,6 @@ class _HomePageState extends State<HomePage> {
                             label: 'Settings',
                           ),
                         ],
-                        // onTap: (final int index) async {
-                        //   switch(index){
-                        //     case 0: _onItemTapped;
-                        //     case 1:
-                        //     case 2:
-                        //     case 3:
-                        //     case 4:
-                        //   }
-                        // },
                       ),
                       color: Colors.yellow,
                     ),
@@ -163,6 +106,80 @@ class _HomePageState extends State<HomePage> {
                 ))
           ],
         ));
+  }
+
+  Widget homePage() {
+    return ListView(
+      children: <Widget>[
+        AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                child: IconButton(
+                    icon: Icon(Icons.file_copy),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChatbotPage()));
+                      print('alert chatbot');
+                    }),
+              ),
+              Image.asset(
+                'assets/image/logo.png',
+                height: 50,
+              ),
+              Container(
+                child: IconButton(
+                    icon: Icon(Icons.notifications),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                      print('alert notification');
+                    }),
+              ),
+            ],
+          ),
+          backgroundColor: Color(0xFF57BD37),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        buildNotification(),
+        SizedBox(
+          height: 5,
+        ),
+        buildPlotLocation(),
+        SizedBox(
+          height: 5,
+        ),
+        manageActivity(),
+        SizedBox(
+          height: 5,
+        ),
+        manageMyPlot(),
+        SizedBox(
+          height: 5,
+        ),
+        GestureDetector(
+          child: buildAgriNews(),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AgroNewsPage()));
+          },
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        adsPromotion(),
+        SizedBox(
+          height: 70,
+        ),
+      ],
+    );
   }
 
   Widget buildNotification() {
@@ -339,7 +356,7 @@ class _HomePageState extends State<HomePage> {
                       // margin: EdgeInsets.symmetric(horizontal: 5.0),
                       // decoration: BoxDecoration(color: Colors.amber),
                       child: TileCard(
-                        color: Colors.lightGreen[400],
+                    color: Colors.lightGreen[400],
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [

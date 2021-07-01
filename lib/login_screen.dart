@@ -42,7 +42,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    labelText: 'เบอร์โทรศัพท์ หรือ อีเมล',
+                    hintText: 'เบอร์โทรศัพท์ หรือ อีเมล',
                     filled: true,
                     fillColor: Colors.white,
                     labelStyle: TextStyle(
