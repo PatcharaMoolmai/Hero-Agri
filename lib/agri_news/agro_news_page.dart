@@ -8,8 +8,15 @@ import 'package:hero_agri/card/tile_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AgroNewsPage extends StatefulWidget {
-  const AgroNewsPage({Key key}) : super(key: key);
+  const AgroNewsPage(
+      {Key key,
+      this.textTitle = 'หัวข้อข่าว ',
+      this.textSub =
+          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'})
+      : super(key: key);
 
+  final String textTitle;
+  final String textSub;
   @override
   _AgroNewsPageState createState() => _AgroNewsPageState();
 }
@@ -61,6 +68,37 @@ class _AgroNewsPageState extends State<AgroNewsPage> {
   }
 
   Widget buildNews() {
+    // int news_counts = 0;
+    // List<Widget> widgetNews = <Widget>[];
+    // while (news_counts < 3) {
+    //   widgetNews.add(
+    //     TileCard(
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: <Widget>[
+    //           Text(
+    //             '${widget.textTitle} $news_counts',
+    //             style: TextStyle(
+    //                 fontFamily: 'Anakotmai',
+    //                 fontWeight: FontWeight.w500,
+    //                 fontSize: 30,
+    //                 color: Colors.green),
+    //           ),
+    //           Text(
+    //             widget.textSub,
+    //             style: TextStyle(
+    //               fontFamily: 'Anakotmai',
+    //               fontWeight: FontWeight.w500,
+    //               fontSize: 20,
+    //             ),
+    //           )
+    //         ],
+    //       ),
+    //       padding: EdgeInsets.all(15),
+    //       insets: EdgeInsets.all(20),
+    //     ),
+    //   );
+    // }
     return ListView(
       children: <Widget>[
         GestureDetector(
@@ -69,7 +107,7 @@ class _AgroNewsPageState extends State<AgroNewsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'หัวข้อข่าว 1',
+                    '${widget.textTitle} 1',
                     style: TextStyle(
                         fontFamily: 'Anakotmai',
                         fontWeight: FontWeight.w500,
@@ -77,7 +115,7 @@ class _AgroNewsPageState extends State<AgroNewsPage> {
                         color: Colors.green),
                   ),
                   Text(
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+                    widget.textSub,
                     style: TextStyle(
                       fontFamily: 'Anakotmai',
                       fontWeight: FontWeight.w500,
@@ -90,15 +128,17 @@ class _AgroNewsPageState extends State<AgroNewsPage> {
               insets: EdgeInsets.all(20),
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AgroNewsContinuous()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AgroNewsContinuous()));
             }),
         TileCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'หัวข้อข่าว 2',
+                '${widget.textTitle} 2',
                 style: TextStyle(
                     fontFamily: 'Anakotmai',
                     fontWeight: FontWeight.w500,
@@ -106,7 +146,7 @@ class _AgroNewsPageState extends State<AgroNewsPage> {
                     color: Colors.green),
               ),
               Text(
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+                widget.textSub,
                 style: TextStyle(
                   fontFamily: 'Anakotmai',
                   fontWeight: FontWeight.w500,

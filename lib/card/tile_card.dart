@@ -9,6 +9,7 @@ class TileCard extends StatelessWidget {
     this.padding =
         const EdgeInsets.only(right: 8.0, left: 8.0, top: 4.0, bottom: 4.0),
     this.insets = const EdgeInsets.all(5.0),
+    this.elevation = 8.0,
   });
 
   final Widget child;
@@ -16,12 +17,13 @@ class TileCard extends StatelessWidget {
   final Widget header;
   final EdgeInsets padding;
   final EdgeInsets insets;
+  final double elevation;
 
   @override
   Widget build(BuildContext context) => Padding(
         padding: padding,
         child: Material(
-          elevation: 8.0,
+          elevation: elevation,
           shadowColor: Colors.black45,
           borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           color: color ?? Theme.of(context).colorScheme.surface,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:hero_agri/agri_plot_location/create_plot.dart';
 
 // Project import
 
@@ -43,7 +44,16 @@ class PlotAreaPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       color: Colors.white)),
               SizedBox(height: 20,),
-              Image.asset('assets/image/button/Create_plot.png'),
+              GestureDetector(
+                child: Image.asset('assets/image/button/Create_plot.png'),
+                onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateMyPlotPage()));
+                      print('alert chatbot');
+                    },
+              )
             ],
           ),
         ),
