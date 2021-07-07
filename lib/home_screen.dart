@@ -14,7 +14,7 @@ import 'card/tile_card.dart';
 import 'chatbot_page.dart';
 import 'notification_page.dart';
 import 'agri_plot_location/plot_area.dart';
-import 'setting_page.dart';
+import 'setting/setting_page.dart';
 import 'marketplace/marketplace_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                     elevation: 0,
                     showSelectedLabels: false,
                     showUnselectedLabels: false,
-                    selectedItemColor: Colors.green,
+                    selectedItemColor: Color(0xFF57BD37),
                     onTap: _onItemTapped,
                     currentIndex: _selectedIndex,
                     items: const <BottomNavigationBarItem>[

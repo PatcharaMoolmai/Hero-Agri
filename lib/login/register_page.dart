@@ -1,6 +1,6 @@
 // Package imports
-import 'package:hero_agri/eula_page.dart';
-import 'package:hero_agri/mobile_auth.dart';
+import 'package:hero_agri/login/eula_page.dart';
+import 'package:hero_agri/login/mobile_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';

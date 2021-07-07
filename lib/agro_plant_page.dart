@@ -22,7 +22,7 @@ class AgroPlantPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'หัวข้อ',
+                'หัวข้อ ${plant_count+1}',
                 style: TextStyle(
                     fontFamily: 'Anakotmai',
                     fontSize: 25,

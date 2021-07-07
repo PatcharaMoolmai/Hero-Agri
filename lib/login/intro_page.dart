@@ -6,8 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:hero_agri/card/tile_card.dart';
 
 // Package import
-import 'package:hero_agri/login_screen.dart';
-import 'package:hero_agri/register_page.dart';
+import 'package:hero_agri/login/login_screen.dart';
+import 'package:hero_agri/login/register_page.dart';
 
 class AppIntroPage extends StatefulWidget {
   const AppIntroPage({Key key}) : super(key: key);

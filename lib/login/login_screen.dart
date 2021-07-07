@@ -1,6 +1,6 @@
 // Package imports
 import 'package:hero_agri/home_screen.dart';
-import 'package:hero_agri/register_page.dart';
+import 'package:hero_agri/login/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';

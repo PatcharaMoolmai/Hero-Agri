@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:hero_agri/card/tile_card.dart';
+import 'package:hero_agri/setting/add_actionee.dart';
+import 'package:hero_agri/setting/manage_actionee.dart';
 
 // Project import
 
@@ -235,10 +237,45 @@ class SettingPage extends StatelessWidget {
                             elevation: 0,
                             child: Container(
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 GestureDetector(
-                                  child: Text('จัดการผู้ใช้'),
+                                  child: ListTile(
+                                    leading: Icon(Icons.account_circle_outlined,
+                                        color: Color(0xFF57BD37)),
+                                    title: Text(
+                                      'จัดการผู้รับผิดชอบ',
+                                      style: TextStyle(
+                                        fontFamily: 'Anakotmai',
+                                      ),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ManageActioneePage()));
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: ListTile(
+                                    leading: Icon(Icons.account_circle_rounded,
+                                        color: Color(0xFF57BD37)),
+                                    title: Text(
+                                      'เพิ่มผู้รับผิดชอบ',
+                                      style: TextStyle(
+                                        fontFamily: 'Anakotmai',
+                                      ),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddActioneePage()));
+                                  },
                                 )
                               ],
                             ))),
