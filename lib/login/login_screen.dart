@@ -7,13 +7,25 @@ import 'package:flutter/widgets.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 class UserLoginPage extends StatefulWidget {
-  const UserLoginPage({Key key}) : super(key: key);
+  const UserLoginPage(
+      {Key key,
+      this.usernameTextEditingController,
+      this.passwordTextEditingController,
+      this.parentAction})
+      : super(key: key);
+
+  final TextEditingController usernameTextEditingController;
+  final TextEditingController passwordTextEditingController;
+
+  final ValueChanged<List<dynamic>> parentAction;
 
   @override
   _UserLoginPageState createState() => _UserLoginPageState();
 }
 
 class _UserLoginPageState extends State<UserLoginPage> {
+  // TextEditingController textEditingController;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +44,6 @@ class _UserLoginPageState extends State<UserLoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // Text(
-              //   'Logo Picture',
-              //   style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),
-              // ),
               Image.asset('assets/icons/logo.png'),
               SizedBox(
                 height: 40,
@@ -52,6 +60,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white))),
+                controller: widget.usernameTextEditingController,
               ),
               SizedBox(
                 height: 20,
@@ -59,6 +68,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
               Container(
                 color: Colors.white,
                 child: PasswordField(
+                    controller: widget.passwordTextEditingController,
                     hintText: 'รหัสผ่าน',
                     hintStyle: TextStyle(
                         fontFamily: 'Anakotmai', fontWeight: FontWeight.w500),

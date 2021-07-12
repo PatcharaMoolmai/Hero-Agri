@@ -27,19 +27,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
-    // switch (index) {
-    //   // case 0:
-    //   case 1:
-    //     Navigator.push(
-    //         context, MaterialPageRoute(builder: (context) => PlotAreaPage()));
-    //     break;
-    //   // case 2:
-    //   // case 3:
-    //   case 4:
-    //     Navigator.push(
-    //         context, MaterialPageRoute(builder: (context) => SettingPage()));
-    //     break;
-    // }
     setState(() {
       _selectedIndex = index;
     });

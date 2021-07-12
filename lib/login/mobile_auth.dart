@@ -132,6 +132,7 @@ class _MobileAuthenticatePageState extends State<MobileAuthenticatePage> {
                       animationDuration: Duration(milliseconds: 300),
                       enableActiveFill: true,
                       errorAnimationController: errorController,
+                      // Controller
                       controller: textEditingController,
                       keyboardType: TextInputType.number,
                       // boxShadows: [

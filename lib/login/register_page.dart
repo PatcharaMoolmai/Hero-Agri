@@ -7,14 +7,43 @@ import 'package:flutter/widgets.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 class UserRegisterPage extends StatefulWidget {
-  const UserRegisterPage({Key key}) : super(key: key);
+  const UserRegisterPage(
+      {Key key,
+      this.telephoneTextEditingController,
+      this.nameTextEditingController,
+      this.passwordTextEditingController,
+      this.parentAction})
+      : super(key: key);
+
+  final TextEditingController telephoneTextEditingController;
+  final TextEditingController nameTextEditingController;
+  final TextEditingController passwordTextEditingController;
+
+  final ValueChanged<List<dynamic>> parentAction;
 
   @override
   _UserRegisterPageState createState() => _UserRegisterPageState();
 }
 
 class _UserRegisterPageState extends State<UserRegisterPage> {
+
   bool isChecked = false;
+  bool _agreedToTerm = false;
+
+  void _setAgreedToTerm(bool newValue) {
+    // _passDataToParent('term',newValue);
+    setState(() {
+      _agreedToTerm = newValue;
+    });
+  }
+
+  void _passDataToParent(String key, dynamic value) {
+    List<dynamic> addData = List<dynamic>();
+    addData.add(key);
+    addData.add(value);
+    widget.parentAction(addData);
+  }
+
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -83,6 +112,8 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white))),
+                // name controller
+                controller: widget.nameTextEditingController,
               ),
               SizedBox(
                 height: 10,
@@ -95,11 +126,11 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                     labelStyle: TextStyle(
                         fontFamily: 'Anakotmai', fontWeight: FontWeight.w500),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white)
-                    ),
+                        borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white)
-                    )),
+                        borderSide: BorderSide(color: Colors.white))),
+                // telephone controller
+                controller: widget.telephoneTextEditingController,
               ),
               SizedBox(
                 height: 10,
@@ -107,15 +138,15 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
               Container(
                 color: Colors.white,
                 child: PasswordField(
-                  hintText: 'รหัสผ่าน',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white)
-                  ),
-                  hintStyle: TextStyle(
-                      fontFamily: 'Anakotmai', fontWeight: FontWeight.w500),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white)
-                  )),
+                    hintText: 'รหัสผ่าน',
+                    // password controller
+                    controller: widget.passwordTextEditingController,
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    hintStyle: TextStyle(
+                        fontFamily: 'Anakotmai', fontWeight: FontWeight.w500),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white))),
               ),
               SizedBox(
                 height: 10,
@@ -133,15 +164,15 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
               Container(
                 color: Colors.white,
                 child: PasswordField(
-                  hintText: 'รหัสผ่านอีกครั้ง',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white)
-                  ),
-                  hintStyle: TextStyle(
-                      fontFamily: 'Anakotmai', fontWeight: FontWeight.w500),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white)
-                  )),
+                    hintText: 'รหัสผ่านอีกครั้ง',
+                    // password controller
+                    controller: widget.passwordTextEditingController,
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    hintStyle: TextStyle(
+                        fontFamily: 'Anakotmai', fontWeight: FontWeight.w500),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white))),
               ),
               Row(
                 children: <Widget>[
@@ -149,11 +180,7 @@ class _UserRegisterPageState extends State<UserRegisterPage> {
                     checkColor: Colors.white,
                     // fillColor: MaterialStateProperty.resolveWith(getColor),
                     value: isChecked,
-                    onChanged: (bool value) {
-                      setState(() {
-                        isChecked = value;
-                      });
-                    },
+                    onChanged: _setAgreedToTerm
                   ),
                   Text(
                     'ฉันได้ยอมรับ',
