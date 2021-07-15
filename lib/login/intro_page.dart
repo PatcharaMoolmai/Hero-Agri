@@ -198,13 +198,18 @@ class PageTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
     return Container(
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.asset('assets/image/logo.png'),
+        Container(
+          child: Image.asset('assets/image/logo.png'),
+          height: height*0.3,
+        ),
         SizedBox(
-          height: 50,
+          height: height*0.01,
         ),
         Text(
           'Hero Agri ระบบที่ให้คำแนะนำการปลูก',

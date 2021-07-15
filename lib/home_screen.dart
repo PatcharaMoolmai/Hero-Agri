@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/card/plot_example_card.dart';
 import 'package:hero_agri/main.dart';
+import 'package:hero_agri/manage_plot/manage_my_plot.dart';
 
 // Project import
 import 'agri_news/agro_news_page.dart';
@@ -50,39 +52,41 @@ class _HomePageState extends State<HomePage> {
         Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 75,
+              height: 80,
               child: Theme(
                 data:
                     Theme.of(context).copyWith(canvasColor: Colors.transparent),
                 child: FooterTileCard(
-                  insets: EdgeInsets.all(0),
+                  insets: EdgeInsets.symmetric(vertical: 0),
                   padding: EdgeInsets.all(9),
                   child: BottomNavigationBar(
                     elevation: 0,
                     showSelectedLabels: false,
                     showUnselectedLabels: false,
                     selectedItemColor: Color(0xFF57BD37),
+                    unselectedItemColor: Colors.white,
+                    type: BottomNavigationBarType.fixed,
                     onTap: _onItemTapped,
                     currentIndex: _selectedIndex,
                     items: const <BottomNavigationBarItem>[
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.home),
+                        icon: FaIcon(FontAwesomeIcons.home),
                         label: 'Home',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.grade),
-                        label: 'Level',
+                        icon: FaIcon(FontAwesomeIcons.leaf),
+                        label: 'Leaf',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.shopping_cart),
-                        label: 'Notification',
+                        icon: FaIcon(FontAwesomeIcons.shoppingCart),
+                        label: 'Noti',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.menu_book_sharp),
-                        label: 'Achievements',
+                        icon: FaIcon(FontAwesomeIcons.book),
+                        label: 'Achi',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.settings),
+                        icon: FaIcon(FontAwesomeIcons.userAlt),
                         label: 'Settings',
                       ),
                     ],
@@ -205,8 +209,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        Column(
-          children: <Widget>[Image.asset('assets/image/notificate-bot.png')],
+        Container(
+          child: Image.asset('assets/image/notificate-bot.png'),
+          height: 120,
         )
       ],
     );
@@ -229,7 +234,7 @@ class _HomePageState extends State<HomePage> {
           CarouselSlider(
             options: CarouselOptions(
                 aspectRatio: 2.0,
-                enlargeCenterPage: true,
+                // enlargeCenterPage: true,
                 enableInfiniteScroll: false,
                 height: 220
                 // initialPage: 1,
@@ -439,7 +444,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PlotAreaPage()));
+                      MaterialPageRoute(builder: (context) => ManageMyPlot()));
                 },
               )
             ],
@@ -463,7 +468,7 @@ class _HomePageState extends State<HomePage> {
           CarouselSlider(
             options: CarouselOptions(
               aspectRatio: 2.0,
-              enlargeCenterPage: true,
+              // enlargeCenterPage: true,
               enableInfiniteScroll: false,
               // initialPage: 1,
               // autoPlay: true,
@@ -549,7 +554,7 @@ class _HomePageState extends State<HomePage> {
           CarouselSlider(
             options: CarouselOptions(
                 aspectRatio: 2.0,
-                enlargeCenterPage: true,
+                // enlargeCenterPage: true,
                 enableInfiniteScroll: false,
                 height: 95
                 // initialPage: 1,
@@ -632,7 +637,6 @@ class _HomePageState extends State<HomePage> {
               aspectRatio: 2.0,
               // enlargeCenterPage: true,
               enableInfiniteScroll: false,
-
               // initialPage: 1,
               // autoPlay: true,
             ),

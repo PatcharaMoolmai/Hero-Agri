@@ -41,6 +41,7 @@ class LocalDatabase extends ChangeNotifier {
 
   // onCreate function
   static FutureOr<void> _onCreate(Database db, int version) async {
+    print('Create database');
     await UserProfile.onCreate(db, version);
     await NewsDatabase.onCreate(db, version);
   }

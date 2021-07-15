@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Anakotmai',
       ),
       // home: AppIntroPage()
       home: MyHomePage()
@@ -65,7 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     _checkLogin();
     LocalDatabase.getLocalDatabase();
-    print('Create Database succes');
     super.initState();
   }
 
