@@ -1,0 +1,12 @@
+[
+    {
+        "plot_activity" :[{
+            "name":"watering",
+            "th_name":"การรดน้ำ"
+        },
+        {
+            "name":"fertilizing",
+            "th_name":"การใส่ปุ๋ย"
+        }]
+    }
+]

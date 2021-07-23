@@ -4,7 +4,14 @@ import 'package:hero_agri/home_screen.dart';
 import 'package:hero_agri/login/intro_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// need this for `Intl.defaultLocale = "th";`
+import 'package:intl/intl.dart';
+// need this for initializeDateFormatting()
+import 'package:intl/date_symbol_data_local.dart';
+
 void main() {
+  Intl.defaultLocale = "th";
+  initializeDateFormatting();
   runApp(MyApp());
 }
 
@@ -17,6 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Anakotmai',
+        
       ),
       // home: AppIntroPage()
       home: MyHomePage()
