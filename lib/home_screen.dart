@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 5,
         ),
-        buildPlotLocation(),
+        plotExample(),
         SizedBox(
           height: 5,
         ),
@@ -452,7 +452,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildPlotLocation() {
+  Widget plotExample() {
+    final List<String> netSrcImage = [
+      'https://static1.bigstockphoto.com/2/5/1/large1500/152442050.jpg',
+      'https://www.maxpixels.net/static/photo/1x/Nature-Zucchini-Garden-Plant-Leaf-Garden-Plot-1002528.jpg',
+      'https://www.thaiticketmajor.com/variety/img_content/imgeditor/3(443).jpg',
+      'https://babban.club/wp-content/uploads/2017/09/15380357_978689428903394_4619143797969164361_n.jpg',
+      'https://i.pinimg.com/736x/9a/5e/e0/9a5ee06d099179f8020c398202c2b1f9.jpg'
+    ];
     return Padding(
       padding: EdgeInsets.all(15),
       child: Column(
@@ -473,7 +480,7 @@ class _HomePageState extends State<HomePage> {
               // initialPage: 1,
               // autoPlay: true,
             ),
-            items: [1, 2, 3, 4, 5].map((i) {
+            items: netSrcImage.map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
@@ -482,12 +489,13 @@ class _HomePageState extends State<HomePage> {
                       insets: EdgeInsets.zero,
                       child: Column(
                         children: <Widget>[
-                          Container(
-                            height: 90,
-                            child: TileCard(
-                              color: Color(0xFF57BD37),
-                              child: Text('รูปที่ $i'),
-                              padding: EdgeInsets.all(0),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              i,
+                              fit: BoxFit.cover,
+                              width: 1000,
+                              height: 100,
                             ),
                           ),
                           SizedBox(
@@ -507,14 +515,14 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'สวนตัวอย่างที่ $i',
+                                      'สวนตัวอย่างที่ ${netSrcImage.indexOf(i) + 1}',
                                       style: TextStyle(
                                           fontFamily: 'Anakotmai',
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500),
                                     ),
                                     Text(
-                                      'รายละเอียดสวนที่ $i',
+                                      'รายละเอียดสวนที่ ${netSrcImage.indexOf(i) + 1}',
                                       style: TextStyle(
                                           fontFamily: 'Anakotmai',
                                           fontSize: 15,
@@ -653,14 +661,14 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           Flexible(
                             child: Container(
-                                height: 177,
-                                child: TileCard(
-                                  color: Color(0xFF57BD37),
-                                    padding: EdgeInsets.zero,
-                                    insets: EdgeInsets.zero,
-                                    child: Text('รูปโปรโมชัน'),
-                                  ),
-                                ),
+                              height: 177,
+                              child: TileCard(
+                                color: Color(0xFF57BD37),
+                                padding: EdgeInsets.zero,
+                                insets: EdgeInsets.zero,
+                                child: Text('รูปโปรโมชัน'),
+                              ),
+                            ),
                           ),
                           SizedBox(
                             width: 10,
