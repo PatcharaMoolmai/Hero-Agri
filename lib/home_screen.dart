@@ -628,6 +628,27 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget adsPromotion() {
+    final List<String> productPicList = [
+      'https://www.dronezon.com/wp-content/uploads/2014/10/DJI-Phantom-2-Vision-Plus-e1580563366975.jpg.webp',
+      'https://th-test-11.slatic.net/shop/5ba518d78718024fcc1d4d8dcca4a0c2.jpeg_2200x2200q80.jpg_.webp',
+      'https://www.chiataigroup.com/imgadmins/product_photo/pro20200602095323.png',
+      'https://th-live-01.slatic.net/p/78a3a76406dd2998224736eb13b0956d.jpg',
+      'https://www.siamkubota.co.th/backend/public/uploads/agriculture/images/af1f3dcfb73a1c3e5ed8f8ccdcfce429.png',
+    ];
+    final List<String> productNameList = [
+      'โดรน',
+      'เครื่องพ่นยาฆ่าแมลง',
+      'ปุ๋ย',
+      'ดินบรรจุถุง',
+      'รถแทรกเตอร์',
+    ];
+    final List<String> adsShopList = [
+      'ร้าน ก',
+      'ร้าน ก',
+      'ร้าน ข',
+      'ร้าน ค',
+      'ร้าน ค',
+    ];
     return Padding(
       padding: EdgeInsets.all(15),
       child: Column(
@@ -648,25 +669,26 @@ class _HomePageState extends State<HomePage> {
               // initialPage: 1,
               // autoPlay: true,
             ),
-            items: [1, 2, 3, 4, 5].map((i) {
+            items: productPicList.map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
                     // width: MediaQuery.of(context).size.width,
                     // margin: EdgeInsets.symmetric(horizontal: 5.0),
                     child: TileCard(
-                      insets: EdgeInsets.zero,
+                      insets: EdgeInsets.all(10),
                       child: Row(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Flexible(
-                            child: Container(
-                              height: 177,
-                              child: TileCard(
-                                color: Color(0xFF57BD37),
-                                padding: EdgeInsets.zero,
-                                insets: EdgeInsets.zero,
-                                child: Text('รูปโปรโมชัน'),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                i,
+                                fit: BoxFit.cover,
+                                // width: 1000,
+                                // height: 1000,
                               ),
                             ),
                           ),
@@ -686,13 +708,14 @@ class _HomePageState extends State<HomePage> {
                                         fontWeight: FontWeight.w500)),
                                 Row(
                                   children: <Widget>[
-                                    Text('ชื่อสินค้า :',
+                                    Text('ชื่อสินค้า : ',
                                         style: TextStyle(
                                             fontFamily: 'Anakotmai',
                                             fontSize: 15,
                                             color: Colors.grey[400],
                                             fontWeight: FontWeight.w500)),
-                                    Text('AAA',
+                                    Text(
+                                        '${productNameList[productPicList.indexOf(i)]}',
                                         style: TextStyle(
                                             fontFamily: 'Anakotmai',
                                             fontSize: 15,
@@ -708,7 +731,8 @@ class _HomePageState extends State<HomePage> {
                                             fontSize: 15,
                                             color: Colors.grey[400],
                                             fontWeight: FontWeight.w500)),
-                                    Text('AAA Shop',
+                                    Text(
+                                        '${adsShopList[productPicList.indexOf(i)]}',
                                         style: TextStyle(
                                             fontFamily: 'Anakotmai',
                                             fontSize: 15,
