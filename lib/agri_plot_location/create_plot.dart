@@ -9,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hero_agri/agri_plot_location/create_plot_continuous.dart';
 import 'package:hero_agri/card/tile_card.dart';
-import 'package:hero_agri/manage_plot/manage_my_plot.dart';
+import 'package:hero_agri/plot_action/manage_my_plot.dart';
 
 class CreateMyPlotPage extends StatefulWidget {
   const CreateMyPlotPage({Key key}) : super(key: key);

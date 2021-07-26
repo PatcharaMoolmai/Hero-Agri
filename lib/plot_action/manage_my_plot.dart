@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/card/tile_card.dart';
-import 'package:hero_agri/manage_plot/my_plot.dart';
+import 'package:hero_agri/plot_action/my_plot.dart';
 import 'package:intl/intl.dart';
 
 // Project import

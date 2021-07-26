@@ -5,7 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/card/tile_card.dart';
 import 'package:hero_agri/card/tile_expandable.dart';
-import 'package:hero_agri/manage_plot/manage_my_plot.dart';
+import 'package:hero_agri/plot_Action/manage_my_plot.dart';
 
 class CreatePlotCont extends StatefulWidget {
   const CreatePlotCont({Key key}) : super(key: key);

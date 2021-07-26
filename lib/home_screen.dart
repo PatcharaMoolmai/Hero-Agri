@@ -6,7 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/card/plot_example_card.dart';
 import 'package:hero_agri/main.dart';
-import 'package:hero_agri/manage_plot/manage_my_plot.dart';
+import 'package:hero_agri/plot_action/manage_my_plot.dart';
 
 // Project import
 import 'agri_news/agro_news_page.dart';

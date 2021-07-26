@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/card/tile_card.dart';
+import 'package:hero_agri/plot_action/action_history.dart';
+import 'package:hero_agri/plot_action/my_plot_continuous.dart';
 import 'package:intl/intl.dart';
 
 class CustomizePlot extends StatefulWidget {
@@ -31,7 +33,12 @@ class _CustomizePlotState extends State<CustomizePlot> {
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PlotActionHistory()));
+                },
                 child: FaIcon(
                   FontAwesomeIcons.history,
                   color: Colors.amber,
@@ -104,7 +111,18 @@ class _CustomizePlotState extends State<CustomizePlot> {
                   SizedBox(
                     height: 15,
                   ),
-                  Divider(color: Color(0xFF2E964C),),
+                  Divider(
+                    color: Color(0xFF2E964C),
+                  ),
+                  // activityTable(),
+                  TextButton(
+                      child: Text('Plot action (Temporaly)'),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyPlotManagement()));
+                      })
                 ],
               ))
         ],
@@ -114,7 +132,8 @@ class _CustomizePlotState extends State<CustomizePlot> {
 
   Widget plantDetail() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Flexible(
           flex: 0,
@@ -136,7 +155,7 @@ class _CustomizePlotState extends State<CustomizePlot> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.zero,
               child: Text(
                 'แปลงย่อยที่ 1',
                 style: TextStyle(
@@ -145,100 +164,78 @@ class _CustomizePlotState extends State<CustomizePlot> {
                     fontWeight: FontWeight.w500),
               ),
             ),
-            // Plant type & status
             Row(
-              children: <Widget>[
-                Flexible(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text(
-                        'ชนิดพืช',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF57BD37),
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Text('ทุเรียน')
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text(
-                        'สถานะพืช',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF57BD37),
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Icon(
-                        Icons.circle,
-                        size: 15,
-                        color: Color(0xFF57BD37),
-                      ),
-                      Text('ปกติ')
-                    ],
-                  ),
-                )
-              ],
-            ),
-            // Plant age & area
-            Row(
-              children: <Widget>[
-                Flexible(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text(
-                        'อายุ',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF57BD37),
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Text(' 0 ปี 0 เดือน')
-                    ],
-                  ),
-                ),
-                Flexible(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text(
-                        'พื้นที่',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF57BD37),
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Text('0 ไร่')
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'พื้นที่',
+                  'ชนิดพืช',
                   style: TextStyle(
                       fontSize: 18,
                       color: Color(0xFF57BD37),
                       fontWeight: FontWeight.w500),
                 ),
-                Text('ตำแหน่งที่ตั้ง'),
-                SizedBox(
-                  width: 115,
-                )
+                Text('ทุเรียน')
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'พันธ์พืช',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF57BD37),
+                      fontWeight: FontWeight.w500),
+                ),
+                Text('หมอนทอง'),
+                // SizedBox(
+                //   width: 115,
+                // )
               ],
             )
           ],
-        ))
+        )),
+        Flexible(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'สถานะพืช',
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Color(0xFF57BD37),
+                    fontWeight: FontWeight.w500),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.circle,
+                    size: 15,
+                    color: Color(0xFF57BD37),
+                  ),
+                  Text('ปกติ')
+                ],
+              )
+            ],
+          ),
+        )
       ],
     );
   }
+
+  Widget activityTable() {
+    // List<Widget> tableWidget = [];
+    // int weekCount = 0;
+    // while (weekCount < 52) {
+    //   tableWidget.add(Table());
+    // }
+    // return Table();
+  }
+}
+
+class Table {
+  int id;
+  String activity;
 }

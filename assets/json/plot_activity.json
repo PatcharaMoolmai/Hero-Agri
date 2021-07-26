@@ -1,12 +1,19 @@
 [
     {
         "plot_activity" :[{
-            "name":"watering",
-            "th_name":"การรดน้ำ"
+            "activity_id" :1,
+            "activity_name":"watering",
+            "activity_th_name":"การรดน้ำ"
         },
         {
-            "name":"fertilizing",
-            "th_name":"การใส่ปุ๋ย"
+            "activity_id" :2,
+            "activity_name":"fertilizing",
+            "activity_th_name":"การใส่ปุ๋ยพืช"
+        },
+        {
+            "activity_id" :3,
+            "activity_name":"pruning",
+            "activity_th_name":"การตัดแต่งกิ่ง"
         }]
     }
 ]
