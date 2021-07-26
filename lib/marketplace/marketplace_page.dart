@@ -14,7 +14,7 @@ class MarketplacePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         body: Container(
           padding: EdgeInsets.all(30),
           child: Column(

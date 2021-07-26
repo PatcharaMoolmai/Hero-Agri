@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/card/tile_card.dart';
+import 'package:hero_agri/marketplace/marketplace_page.dart';
+import 'package:hero_agri/plot_action/plot_information.dart';
 
 class MyPlotManagement extends StatefulWidget {
   const MyPlotManagement({Key key}) : super(key: key);
@@ -16,6 +18,7 @@ class MyPlotManagement extends StatefulWidget {
 class _MyPlotManagementState extends State<MyPlotManagement> {
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -41,11 +44,18 @@ class _MyPlotManagementState extends State<MyPlotManagement> {
                   SizedBox(
                     height: 15,
                   ),
-                  Divider(
-                    color: Color(0xFF2E964C),
-                  ),
+                  // Divider(
+                  //   color: Color(0xFF2E964C),
+                  // ),
+                  activitySection()
                 ],
-              ))
+              )),
+          SizedBox(
+            height: height * 0.1,
+          ),
+          GestureDetector(
+            child: Image.asset('assets/image/button/add_activity_btn.png'),
+          )
         ],
       ),
     );
@@ -189,6 +199,98 @@ class _MyPlotManagementState extends State<MyPlotManagement> {
           ],
         ))
       ],
+    );
+  }
+
+  Widget activitySection() {
+    final double height = MediaQuery.of(context).size.height;
+    return Container(
+      height: height * 0.4,
+      child: ListView(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading: FaIcon(
+                    FontAwesomeIcons.dotCircle,
+                    color: Color(0xFF57BD37),
+                  ),
+                  title: Text(
+                    'การดูแลรักษา',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                  ),
+                  subtitle: Text('ประจำวันที่ xxx'),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading: FaIcon(
+                    FontAwesomeIcons.dotCircle,
+                    color: Color(0xFFF0972A),
+                  ),
+                  title: Text(
+                    'ป้องกัน/กำจัดศัตรูพืช',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                  ),
+                  subtitle: Text('ประจำวันที่ xxx'),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading: FaIcon(
+                    FontAwesomeIcons.dotCircle,
+                    color: Color(0xFF776D60),
+                  ),
+                  title: Text(
+                    'การพยากรณ์',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                  ),
+                  subtitle: Text('ประจำวันที่ xxx'),
+                )
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PlotInformation()));
+                  },
+                  child: Image.asset(
+                    'assets/image/button/more_plot_info_btn.png',
+                    scale: 1.1,
+                  )),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MarketplacePage()));
+                  },
+                  child: Image.asset(
+                    'assets/image/button/find_production_factor_btn.png',
+                    scale: 1.1,
+                  ))
+            ],
+          )
+        ],
+      ),
     );
   }
 }

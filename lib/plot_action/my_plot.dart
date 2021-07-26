@@ -57,7 +57,7 @@ class _CustomizePlotState extends State<CustomizePlot> {
                 Column(
                   children: <Widget>[
                     Text(
-                      'สัปดาห์ที่ n',
+                      'สัปดาห์ที่ 1',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
@@ -114,15 +114,15 @@ class _CustomizePlotState extends State<CustomizePlot> {
                   Divider(
                     color: Color(0xFF2E964C),
                   ),
-                  // activityTable(),
-                  TextButton(
-                      child: Text('Plot action (Temporaly)'),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyPlotManagement()));
-                      })
+                  activityTable(),
+                  // TextButton(
+                  //     child: Text('Plot action (Temporaly)'),
+                  //     onPressed: () {
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => MyPlotManagement()));
+                  //     })
                 ],
               ))
         ],
@@ -226,16 +226,52 @@ class _CustomizePlotState extends State<CustomizePlot> {
   }
 
   Widget activityTable() {
-    // List<Widget> tableWidget = [];
-    // int weekCount = 0;
-    // while (weekCount < 52) {
-    //   tableWidget.add(Table());
-    // }
-    // return Table();
+    final double width = MediaQuery.of(context).size.width;
+    return Container(
+        child: Table(
+            // border: TableBorder.all(width: 1.0, color: Colors.black),
+            border: TableBorder.symmetric(
+                inside: BorderSide(
+              width: 1,
+              color: Color(0xFF57BD37),
+            )),
+            // border: TableBorder(
+            //     verticalInside: BorderSide(
+            //         width: 1,
+            //         color: Color(0xFF57BD37),
+            //         style: BorderStyle.solid)),
+            children: [
+          for (int i = 0; i < 52; i++)
+            TableRow(children: [
+              TableCell(
+                  child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Text('สัปดาห์ที้่ ${i + 1}'),
+                    VerticalDivider(),
+                    GestureDetector(
+                      child: Container(
+                        width: width * 0.52,
+                        child: TileCard(
+                          elevation: 0,
+                          color: Colors.blue[200],
+                          borderRadius: 50,
+                          child: new Text('activity'),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyPlotManagement()));
+                      },
+                    )
+                  ],
+                ),
+              ))
+            ])
+        ]));
   }
-}
-
-class Table {
-  int id;
-  String activity;
 }
