@@ -460,6 +460,20 @@ class _HomePageState extends State<HomePage> {
       'https://babban.club/wp-content/uploads/2017/09/15380357_978689428903394_4619143797969164361_n.jpg',
       'https://i.pinimg.com/736x/9a/5e/e0/9a5ee06d099179f8020c398202c2b1f9.jpg'
     ];
+    final List<String> plotOwnerName = [
+      'สวนผักคุณเอ',
+      'สวนผักคุณบี',
+      'แปลงผักคุณซี',
+      'แปลงผักคุณดี',
+      'แปลงผักคุณเอ',
+    ];
+    final List<String> plotLocation = [
+      'อำเภอ ก จังหวัด ก',
+      'อำเภอ ข จังหวัด ข',
+      'อำเภอ ค จังหวัด ค',
+      'อำเภอ ง จังหวัด ง',
+      'อำเภอ จ จังหวัด จ',
+    ];
     return Padding(
       padding: EdgeInsets.all(15),
       child: Column(
@@ -475,6 +489,7 @@ class _HomePageState extends State<HomePage> {
           CarouselSlider(
             options: CarouselOptions(
               aspectRatio: 2.0,
+              height: 220,
               // enlargeCenterPage: true,
               enableInfiniteScroll: false,
               // initialPage: 1,
@@ -484,19 +499,63 @@ class _HomePageState extends State<HomePage> {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
-                      child: Container(
                     child: TileCard(
                       insets: EdgeInsets.zero,
                       child: Column(
                         children: <Widget>[
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              i,
-                              fit: BoxFit.cover,
-                              width: 1000,
-                              height: 100,
-                            ),
+                          Stack(
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  i,
+                                  fit: BoxFit.cover,
+                                  width: 1000,
+                                  height: 135,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      width: 80,
+                                      child: TileCard(
+                                        child: Column(
+                                          children: [
+                                            FaIcon(
+                                              FontAwesomeIcons.temperatureHigh,
+                                              color: Color(0xFF57BD37),
+                                            ),
+                                            Text(
+                                              '33.5 °C',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color(0xFF57BD37)),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 80,
+                                      child: TileCard(
+                                        child: Column(
+                                          children: [
+                                            FaIcon(FontAwesomeIcons.tint,
+                                                color: Color(0xFF57BD37)),
+                                            Text('39.5 %',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Color(0xFF57BD37)))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
                           SizedBox(
                             height: 5,
@@ -507,7 +566,11 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               // mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.circle),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: FaIcon(FontAwesomeIcons.leaf,
+                                      color: Color(0xFF57BD37)),
+                                ),
                                 SizedBox(
                                   width: 20,
                                 ),
@@ -515,18 +578,20 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'สวนตัวอย่างที่ ${netSrcImage.indexOf(i) + 1}',
+                                      '${plotOwnerName[netSrcImage.indexOf(i)]}',
                                       style: TextStyle(
                                           fontFamily: 'Anakotmai',
                                           fontSize: 20,
-                                          fontWeight: FontWeight.w500),
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.amber),
                                     ),
                                     Text(
-                                      'รายละเอียดสวนที่ ${netSrcImage.indexOf(i) + 1}',
+                                      '${plotLocation[netSrcImage.indexOf(i)]}',
                                       style: TextStyle(
                                           fontFamily: 'Anakotmai',
                                           fontSize: 15,
-                                          fontWeight: FontWeight.w400),
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.green[900]),
                                     ),
                                   ],
                                 )
@@ -536,7 +601,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                  ));
+                  );
                 },
               );
             }).toList(),
