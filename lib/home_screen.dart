@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hero_agri/activity/activity_page.dart';
 import 'package:hero_agri/card/plot_example_card.dart';
 import 'package:hero_agri/main.dart';
 import 'package:hero_agri/plot_action/manage_my_plot.dart';
@@ -218,6 +219,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget manageActivity() {
+    final List<String> activityList = [
+      'การดูแลรักษา',
+      'การป้องกัน',
+      'การพยากรณ์',
+      'กิจกรรมพิเศษ'
+    ];
     return Padding(
       padding: EdgeInsets.all(15),
       child: Column(
@@ -231,168 +238,84 @@ class _HomePageState extends State<HomePage> {
                 fontSize: 22,
                 fontWeight: FontWeight.w500),
           ),
-          CarouselSlider(
-            options: CarouselOptions(
-                aspectRatio: 2.0,
-                // enlargeCenterPage: true,
-                enableInfiniteScroll: false,
-                height: 220
-                // initialPage: 1,
-                // autoPlay: true,
-                ),
-            items: [1, 2, 3, 4, 5].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                      child: Container(
-                    child: TileCard(
-                      insets: EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'สัปดาห์ที่ $i :',
-                                    style: TextStyle(
-                                      fontFamily: 'Anakotmai',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  TileCard(
-                                    elevation: 0,
-                                    insets:
-                                        EdgeInsets.symmetric(horizontal: 30),
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 0),
-                                    child: Text(
-                                      'ระยะเวลา...',
+          GestureDetector(
+            child: CarouselSlider(
+              options: CarouselOptions(
+                  aspectRatio: 2.0,
+                  // enlargeCenterPage: true,
+                  enableInfiniteScroll: false,
+                  height: 220
+                  // initialPage: 1,
+                  // autoPlay: true,
+                  ),
+              items: activityList.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                        child: Container(
+                      child: TileCard(
+                        insets: EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'สัปดาห์ที่ ${activityList.indexOf(i) + 1} :',
                                       style: TextStyle(
                                         fontFamily: 'Anakotmai',
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                  )
-                                ],
-                              ),
-                              TileCard(
-                                elevation: 0,
-                                insets: EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 25),
-                                child: Text(
-                                  'ชื่อกิจกรรม',
-                                  style: TextStyle(
-                                    fontFamily: 'Anakotmai',
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                    TileCard(
+                                      elevation: 0,
+                                      insets:
+                                          EdgeInsets.symmetric(horizontal: 30),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 0),
+                                      child: Text(
+                                        'ระยะเวลา...',
+                                        style: TextStyle(
+                                          fontFamily: 'Anakotmai',
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
-                          ),
-                          // Plot 1
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 2.0,
-                                color: Colors.amber,
-                              ),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  'พื้นที่เพาะปลูก',
-                                  style: TextStyle(
-                                    fontFamily: 'Anakotmai',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  'แปลงที่ 1',
-                                  style: TextStyle(
+                                TileCard(
+                                  elevation: 0,
+                                  insets: EdgeInsets.symmetric(
+                                      vertical: 15, horizontal: 10),
+                                  child: Text(
+                                    '$i',
+                                    style: TextStyle(
                                       fontFamily: 'Anakotmai',
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.amber),
-                                ),
-                                Text(
-                                  'ชนิด',
-                                  style: TextStyle(
-                                    fontFamily: 'Anakotmai',
-                                    fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'ประเภท',
-                                  style: TextStyle(
-                                      fontFamily: 'Anakotmai',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.amber),
                                 )
                               ],
                             ),
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          // Plot 2
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 2.0,
-                                color: Colors.amber,
-                              ),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  'พื้นที่เพาะปลูก',
-                                  style: TextStyle(
-                                    fontFamily: 'Anakotmai',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  'แปลงที่ 2',
-                                  style: TextStyle(
-                                      fontFamily: 'Anakotmai',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.amber),
-                                ),
-                                Text(
-                                  'ชนิด',
-                                  style: TextStyle(
-                                    fontFamily: 'Anakotmai',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  'ประเภท',
-                                  style: TextStyle(
-                                      fontFamily: 'Anakotmai',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.amber),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+                            managActivityList()
+                          ],
+                        ),
+                        padding: EdgeInsets.all(2),
+                        color: Color(0xFF57BD37),
                       ),
-                      padding: EdgeInsets.all(2),
-                      color: Color(0xFF57BD37),
-                    ),
-                  ));
-                },
-              );
-            }).toList(),
+                    ));
+                  },
+                );
+              }).toList(),
+            ),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ActivityPage()));
+            },
           )
         ],
       ),
@@ -818,6 +741,66 @@ class _HomePageState extends State<HomePage> {
             }).toList(),
           )
         ],
+      ),
+    );
+  }
+
+  Widget managActivityList() {
+    List<Widget> activityList = <Widget>[];
+    int plotCount = 0;
+    while (plotCount < 5) {
+      activityList.add(
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 2.0,
+              color: Colors.amber,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.all(3),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                'พื้นที่เพาะปลูก',
+                style: TextStyle(
+                  fontFamily: 'Anakotmai',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Text(
+                'แปลงที่ $plotCount',
+                style: TextStyle(
+                    fontFamily: 'Anakotmai',
+                    fontWeight: FontWeight.w500,
+                    color: Colors.amber),
+              ),
+              Text(
+                'ชนิด',
+                style: TextStyle(
+                  fontFamily: 'Anakotmai',
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Text(
+                'ประเภท',
+                style: TextStyle(
+                    fontFamily: 'Anakotmai',
+                    fontWeight: FontWeight.w500,
+                    color: Colors.amber),
+              )
+            ],
+          ),
+        ),
+      );
+      plotCount++;
+    }
+    return Container(
+      height: 100,
+      child: ListView(
+        children: activityList,
       ),
     );
   }
