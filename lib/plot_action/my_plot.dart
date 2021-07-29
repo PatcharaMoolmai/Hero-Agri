@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/card/tile_card.dart';
+import 'package:hero_agri/data_model/activity_model.dart';
 import 'package:hero_agri/plot_action/action_history.dart';
 import 'package:hero_agri/plot_action/my_plot_continuous.dart';
 import 'package:intl/intl.dart';
@@ -13,8 +17,35 @@ class CustomizePlot extends StatefulWidget {
 }
 
 class _CustomizePlotState extends State<CustomizePlot> {
+  List data;
+
+  Future<String> loadJsonData() async {
+    var jsonText =
+        await rootBundle.loadString('assets/json/plot_activity.json');
+    setState(() => data = json.decode(jsonText));
+    return 'success';
+  }
+
+  Future<List<ActivityModel>> readJsonData() async {
+    //read json file
+    final jsondata =
+        await rootBundle.loadString('assets/json/plot_activity.json');
+    //decode json data as list
+    final list = json.decode(jsondata) as List<dynamic>;
+    //map json and initialize using DataModel
+    return list.map((e) => ActivityModel.fromJson(e)).toList();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.loadJsonData();
+    this.readJsonData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    List activityCaring = data[0]["activity_caring"];
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -114,7 +145,29 @@ class _CustomizePlotState extends State<CustomizePlot> {
                   Divider(
                     color: Color(0xFF2E964C),
                   ),
+                  // Text(activityCaring[0]['th_name'].toString()),
+                  // Text(activityCaring[1]['th_name'].toString()),
+                  // Text(activityCaring[2]['th_name'].toString()),
+
+                  // read json flexible (unsuccess rn)
+                  // FutureBuilder(
+                  //     future: readJsonData(),
+                  //     builder: (context, data) {
+                  //       if (data.hasError) {
+                  //         return Center(child: Text("${data.error}"));
+                  //       } else if (data.hasData) {
+                  //         var items = data.data as List<ActivityModel>;
+                  //         print(items);
+                  //         return Text(items.length.toString());
+                  //       } else {
+                  //         // show circular progress while data is getting fetched from json file
+                  //         return Center(
+                  //           child: CircularProgressIndicator(),
+                  //         );
+                  //       }
+                  //     }),
                   activityTable(),
+
                   // TextButton(
                   //     child: Text('Plot action (Temporaly)'),
                   //     onPressed: () {
@@ -226,6 +279,11 @@ class _CustomizePlotState extends State<CustomizePlot> {
   }
 
   Widget activityTable() {
+    // hard code BRUH fix!!
+    List activityCaring = data[0]["activity_caring"];
+    List activityWeathering = data[0]["activity_weathering"];
+    List activityProtection = data[0]["activity_protection"];
+    List activitySpecial = data[0]["activity_special"];
     final double width = MediaQuery.of(context).size.width;
     return Container(
         child: Table(
@@ -252,14 +310,202 @@ class _CustomizePlotState extends State<CustomizePlot> {
                     new Text('สัปดาห์ที้่ ${i + 1}'),
                     VerticalDivider(),
                     GestureDetector(
-                      child: Container(
-                        width: width * 0.52,
-                        child: TileCard(
-                          elevation: 0,
-                          color: Colors.blue[200],
-                          borderRadius: 50,
-                          child: new Text('activity'),
-                        ),
+                      child: Column(
+                        children: [
+                          // Special
+                          Container(
+                            width: width * 0.5,
+                            child: TileCard(
+                              elevation: 0,
+                              color: Colors.blue[400],
+                              borderRadius: 50,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    'กิจกรรมพิเศษ',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  // should be listview
+                                  TileCard(
+                                      borderRadius: 50,
+                                      insets: EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 5),
+                                      color: Colors.blue[200],
+                                      child: Text(activitySpecial[0]['th_name'],
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500)))
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Caring
+                          Container(
+                            width: width * 0.5,
+                            child: TileCard(
+                              elevation: 0,
+                              color: Color(0xFF57BD37),
+                              borderRadius: 50,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    'การดูแลรักษา',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  // should be listview
+                                  Container(
+                                    height: 40,
+                                    width: width * 0.2,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        TileCard(
+                                            borderRadius: 50,
+                                            insets: EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 5),
+                                            color: Colors.lightGreenAccent[700],
+                                            child: Text(
+                                                activityCaring[0]['th_name'],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500))),
+                                        TileCard(
+                                            borderRadius: 50,
+                                            insets: EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 5),
+                                            color: Colors.lightGreenAccent[700],
+                                            child: Text(
+                                                activityCaring[1]['th_name'],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500))),
+                                        TileCard(
+                                            borderRadius: 50,
+                                            insets: EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 5),
+                                            color: Colors.lightGreenAccent[700],
+                                            child: Text(
+                                                activityCaring[2]['th_name'],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500))),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Weathering
+                          Container(
+                            width: width * 0.5,
+                            child: TileCard(
+                              elevation: 0,
+                              color: Colors.brown[400],
+                              borderRadius: 50,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    'การดูแลรักษา',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  // should be listview
+                                  Container(
+                                    height: 40,
+                                    width: width * 0.2,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        TileCard(
+                                            borderRadius: 50,
+                                            insets: EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 5),
+                                            color: Colors.grey,
+                                            child: Text(
+                                                activityWeathering[0]
+                                                    ['th_name'],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500)))
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Caring
+                          Container(
+                            width: width * 0.5,
+                            child: TileCard(
+                              elevation: 0,
+                              color: Colors.amber,
+                              borderRadius: 50,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    'การดูแลรักษา',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  // should be listview
+                                  Container(
+                                    height: 40,
+                                    width: width * 0.2,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        TileCard(
+                                            borderRadius: 50,
+                                            insets: EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 5),
+                                            color: Colors.amber[300],
+                                            child: Text(
+                                                activityProtection[0]
+                                                    ['th_name'],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500))),
+                                        TileCard(
+                                            borderRadius: 50,
+                                            insets: EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 5),
+                                            color: Colors.amber[300],
+                                            child: Text(
+                                                activityProtection[1]
+                                                    ['th_name'],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500))),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       onTap: () {
                         Navigator.push(
