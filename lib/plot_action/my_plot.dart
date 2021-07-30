@@ -18,6 +18,10 @@ class CustomizePlot extends StatefulWidget {
 
 class _CustomizePlotState extends State<CustomizePlot> {
   List data;
+  List _activityCaring;
+  List _activityProtection;
+  List _activityWeathering;
+  List _activitySpecial;
 
   Future<String> loadJsonData() async {
     var jsonText =
@@ -26,14 +30,17 @@ class _CustomizePlotState extends State<CustomizePlot> {
     return 'success';
   }
 
-  Future<List<ActivityModel>> readJsonData() async {
+  Future<void> readJsonData() async {
     //read json file
-    final jsondata =
+    final String response =
         await rootBundle.loadString('assets/json/plot_activity.json');
-    //decode json data as list
-    final list = json.decode(jsondata) as List<dynamic>;
-    //map json and initialize using DataModel
-    return list.map((e) => ActivityModel.fromJson(e)).toList();
+    final _data = await json.decode(response);
+    setState(() {
+      _activityCaring = _data[0]["activity_caring"];
+      _activityProtection = _data[0]["activity_protection"];
+      _activityWeathering = _data[0]["activity_weathering"];
+      _activitySpecial = _data[0]["activity_special"];
+    });
   }
 
   @override
@@ -45,7 +52,8 @@ class _CustomizePlotState extends State<CustomizePlot> {
 
   @override
   Widget build(BuildContext context) {
-    List activityCaring = data[0]["activity_caring"];
+    final double height = MediaQuery.of(context).size.height;
+    print(_activityWeathering);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -77,7 +85,7 @@ class _CustomizePlotState extends State<CustomizePlot> {
               )),
         ],
       ),
-      body: ListView(
+      body: Column(
         children: <Widget>[
           // Top body
           Padding(
@@ -88,7 +96,8 @@ class _CustomizePlotState extends State<CustomizePlot> {
                 Column(
                   children: <Widget>[
                     Text(
-                      'สัปดาห์ที่ 1',
+                      // Need to flexible
+                      'สัปดาห์ที่ 11',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
@@ -166,7 +175,13 @@ class _CustomizePlotState extends State<CustomizePlot> {
                   //         );
                   //       }
                   //     }),
-                  activityTable(),
+                  // Method was call on null in THIS FIX RN!!!!
+                  Container(
+                    height: height * 0.58,
+                    child: ListView(
+                      children: [activityTable()],
+                    ),
+                  )
 
                   // TextButton(
                   //     child: Text('Plot action (Temporaly)'),
@@ -279,245 +294,309 @@ class _CustomizePlotState extends State<CustomizePlot> {
   }
 
   Widget activityTable() {
-    // hard code BRUH fix!!
-    List activityCaring = data[0]["activity_caring"];
-    List activityWeathering = data[0]["activity_weathering"];
-    List activityProtection = data[0]["activity_protection"];
-    List activitySpecial = data[0]["activity_special"];
+    int count = 0;
     final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
     return Container(
         child: Table(
             // border: TableBorder.all(width: 1.0, color: Colors.black),
             border: TableBorder.symmetric(
                 inside: BorderSide(
               width: 1,
-              color: Color(0xFF57BD37),
+              color: Color(0xFF57BD37).withOpacity(0.7),
             )),
-            // border: TableBorder(
-            //     verticalInside: BorderSide(
-            //         width: 1,
-            //         color: Color(0xFF57BD37),
-            //         style: BorderStyle.solid)),
             children: [
           for (int i = 0; i < 52; i++)
             TableRow(children: [
               TableCell(
-                  child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new Text('สัปดาห์ที้่ ${i + 1}'),
-                    VerticalDivider(),
-                    GestureDetector(
-                      child: Column(
-                        children: [
-                          // Special
-                          Container(
-                            width: width * 0.5,
-                            child: TileCard(
-                              elevation: 0,
-                              color: Colors.blue[400],
-                              borderRadius: 50,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'กิจกรรมพิเศษ',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  // should be listview
-                                  TileCard(
-                                      borderRadius: 50,
-                                      insets: EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 5),
-                                      color: Colors.blue[200],
-                                      child: Text(activitySpecial[0]['th_name'],
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500)))
-                                ],
-                              ),
-                            ),
-                          ),
-                          // Caring
-                          Container(
-                            width: width * 0.5,
-                            child: TileCard(
-                              elevation: 0,
-                              color: Color(0xFF57BD37),
-                              borderRadius: 50,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'การดูแลรักษา',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  // should be listview
-                                  Container(
-                                    height: 40,
-                                    width: width * 0.2,
-                                    child: ListView(
-                                      scrollDirection: Axis.horizontal,
-                                      children: [
-                                        TileCard(
-                                            borderRadius: 50,
-                                            insets: EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 5),
-                                            color: Colors.lightGreenAccent[700],
-                                            child: Text(
-                                                activityCaring[0]['th_name'],
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.w500))),
-                                        TileCard(
-                                            borderRadius: 50,
-                                            insets: EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 5),
-                                            color: Colors.lightGreenAccent[700],
-                                            child: Text(
-                                                activityCaring[1]['th_name'],
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.w500))),
-                                        TileCard(
-                                            borderRadius: 50,
-                                            insets: EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 5),
-                                            color: Colors.lightGreenAccent[700],
-                                            child: Text(
-                                                activityCaring[2]['th_name'],
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.w500))),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          // Weathering
-                          Container(
-                            width: width * 0.5,
-                            child: TileCard(
-                              elevation: 0,
-                              color: Colors.brown[400],
-                              borderRadius: 50,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'การดูแลรักษา',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  // should be listview
-                                  Container(
-                                    height: 40,
-                                    width: width * 0.2,
-                                    child: ListView(
-                                      scrollDirection: Axis.horizontal,
-                                      children: [
-                                        TileCard(
-                                            borderRadius: 50,
-                                            insets: EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 5),
-                                            color: Colors.grey,
-                                            child: Text(
-                                                activityWeathering[0]
-                                                    ['th_name'],
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.w500)))
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          // Caring
-                          Container(
-                            width: width * 0.5,
-                            child: TileCard(
-                              elevation: 0,
-                              color: Colors.amber,
-                              borderRadius: 50,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'การดูแลรักษา',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  // should be listview
-                                  Container(
-                                    height: 40,
-                                    width: width * 0.2,
-                                    child: ListView(
-                                      scrollDirection: Axis.horizontal,
-                                      children: [
-                                        TileCard(
-                                            borderRadius: 50,
-                                            insets: EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 5),
-                                            color: Colors.amber[300],
-                                            child: Text(
-                                                activityProtection[0]
-                                                    ['th_name'],
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.w500))),
-                                        TileCard(
-                                            borderRadius: 50,
-                                            insets: EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 5),
-                                            color: Colors.amber[300],
-                                            child: Text(
-                                                activityProtection[1]
-                                                    ['th_name'],
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.w500))),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                  child: Container(
+                // This week check
+                color: i == 10 ? Colors.green[700] : Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Flexible(
+                        flex: 8,
+                        // with time checking
+                        child: new Text(
+                          'สัปดาห์ที่ ${i + 1}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                              color: i == 10
+                                  ? Colors.amber
+                                  : Color(0xFF57BD37)
+                                      .withOpacity(i < 10 ? 0.5 : 1)),
+                        ),
                       ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyPlotManagement()));
-                      },
-                    )
-                  ],
+                      SizedBox(
+                        width: width * 0.03,
+                      ),
+                      // Container(
+                      //     // height: height * 0.15,
+                      //     child: VerticalDivider(color: Color(0xFF57BD37))),
+                      Flexible(
+                          flex: 16,
+                          child: GestureDetector(
+                            child: activityDetail(i),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          MyPlotManagement()));
+                            },
+                          ))
+                    ],
+                  ),
                 ),
-              ))
+              )),
             ])
         ]));
+  }
+
+  Widget activityDetail(int index) {
+    List<Widget> activityDetail = [];
+    if (index % 4 <= 2) {
+      activityDetail.add(activityProtection(index));
+    }
+    if (index % 4 <= 1) {
+      activityDetail.add(activityWeathering(index));
+    }
+    if (index % 4 == 0) {
+      activityDetail.add(activitySpecial(index));
+    }
+    if (index % 4 <= 3) {
+      activityDetail.add(activityCaring(index));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: activityDetail,
+    );
+  }
+
+  // Caring part
+  Widget activityCaring(int index) {
+    final double width = MediaQuery.of(context).size.width;
+    List<Widget> rowActivity = [];
+
+    double opacity;
+    if (index < 10) {
+      opacity = 0.5;
+    } else {
+      opacity = 1;
+    }
+
+    if (index % 3 <= 1) {
+      rowActivity.add(TileCard(
+          borderRadius: 50,
+          elevation: 0,
+          insets: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          color: Colors.lightGreenAccent[700].withOpacity(opacity),
+          child: Text(_activityCaring[0]["th_name"],
+              style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w500))));
+    }
+    if (index % 3 <= 2) {
+      rowActivity.add(TileCard(
+          borderRadius: 50,
+          elevation: 0,
+          insets: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          color: Colors.lightGreenAccent[700].withOpacity(opacity),
+          child: Text(_activityCaring[1]["th_name"],
+              style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w500))));
+    }
+    if (index % 3 == 0) {
+      rowActivity.add(TileCard(
+          borderRadius: 50,
+          elevation: 0,
+          insets: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          color: Colors.lightGreenAccent[700].withOpacity(opacity),
+          child: Text(_activityCaring[2]["th_name"],
+              style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w500))));
+    }
+    return Container(
+        constraints: BoxConstraints(maxWidth: width * 0.8),
+        // width: width * 0.6,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: TileCard(
+            insets: EdgeInsets.symmetric(horizontal: 10),
+            elevation: 0,
+            color: Color(0xFF57BD37).withOpacity(opacity),
+            borderRadius: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'การดูแลรักษา',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                ),
+                Row(
+                  children: rowActivity,
+                )
+              ],
+            ),
+          ),
+        ));
+  }
+
+  // Protection Part
+  Widget activityProtection(int index) {
+    final double width = MediaQuery.of(context).size.width;
+    List<Widget> rowActivity = [];
+
+    double opacity;
+    if (index < 10) {
+      opacity = 0.5;
+    } else {
+      opacity = 1;
+    }
+
+    if (index % 2 <= 1) {
+      rowActivity.add(TileCard(
+          borderRadius: 50,
+          elevation: 0,
+          insets: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          color: Colors.amber[300].withOpacity(opacity),
+          child: Text(_activityProtection[0]["th_name"],
+              style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w500))));
+    }
+    if (index % 2 == 0) {
+      rowActivity.add(TileCard(
+          borderRadius: 50,
+          elevation: 0,
+          insets: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          color: Colors.amber[300].withOpacity(opacity),
+          child: Text(_activityProtection[1]["th_name"],
+              style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w500))));
+    }
+    return Container(
+        // width: width * 0.5,
+        constraints: BoxConstraints(maxWidth: width * 0.8),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: TileCard(
+            insets: EdgeInsets.symmetric(horizontal: 10),
+            elevation: 0,
+            color: Colors.amber.withOpacity(opacity),
+            borderRadius: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'การป้องกัน',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                ),
+                Row(
+                  children: rowActivity,
+                )
+              ],
+            ),
+          ),
+        ));
+  }
+
+  // Weathering Part
+  Widget activityWeathering(int index) {
+    final double width = MediaQuery.of(context).size.width;
+    List<Widget> rowActivity = [];
+
+    double opacity;
+    if (index < 10) {
+      opacity = 0.5;
+    } else {
+      opacity = 1;
+    }
+
+    // method
+    rowActivity.add(TileCard(
+        borderRadius: 50,
+        elevation: 0,
+        insets: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        color: Colors.grey.withOpacity(opacity),
+        child: Text(_activityWeathering[0]["th_name"],
+            style:
+                TextStyle(color: Colors.white, fontWeight: FontWeight.w500))));
+    return Container(
+        // width: width * 0.5,
+        constraints: BoxConstraints(maxWidth: width * 0.8),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: TileCard(
+            insets: EdgeInsets.symmetric(horizontal: 10),
+            elevation: 0,
+            color: Colors.brown[400].withOpacity(opacity),
+            borderRadius: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'การพยากรณ์',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                ),
+                Row(
+                  children: rowActivity,
+                )
+              ],
+            ),
+          ),
+        ));
+  }
+
+  // Special Part
+  Widget activitySpecial(int index) {
+    final double width = MediaQuery.of(context).size.width;
+    List<Widget> rowActivity = [];
+
+    double opacity;
+    if (index < 10) {
+      opacity = 0.5;
+    } else {
+      opacity = 1;
+    }
+
+    rowActivity.add(TileCard(
+        borderRadius: 50,
+        insets: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        color: Colors.blue[200].withOpacity(opacity),
+        child: Text(_activitySpecial[0]["th_name"],
+            style:
+                TextStyle(color: Colors.white, fontWeight: FontWeight.w500))));
+    return Container(
+        // width: width * 0.5,
+        constraints: BoxConstraints(maxWidth: width * 0.8),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: TileCard(
+            insets: EdgeInsets.symmetric(horizontal: 10),
+            elevation: 0,
+            color: Colors.blue[400].withOpacity(opacity),
+            borderRadius: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'กิจกรรมพิเศษ',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                ),
+                Row(
+                  children: rowActivity,
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }
