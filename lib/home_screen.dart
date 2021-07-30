@@ -105,20 +105,20 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
           body: Stack(
             children: <Widget>[
-              Expanded(
-                child: TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    Center(
-                      child: homePage(),
-                    ),
-                    Center(child: PlotAreaPage()),
-                    Center(child: MarketplacePage()),
-                    Center(child: AgroPlantPage()),
-                    Center(child: SettingPage()),
-                  ],
-                ),
+              // Expanded(
+              TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  Center(
+                    child: homePage(),
+                  ),
+                  Center(child: PlotAreaPage()),
+                  Center(child: MarketplacePage()),
+                  Center(child: AgroPlantPage()),
+                  Center(child: SettingPage()),
+                ],
               ),
+              // ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
