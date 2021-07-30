@@ -46,58 +46,126 @@ class _HomePageState extends State<HomePage> {
       AgroPlantPage(),
       SettingPage()
     ];
-    return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        _widgertOption.elementAt(_selectedIndex),
-        Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: 80,
-              child: Theme(
-                data:
-                    Theme.of(context).copyWith(canvasColor: Colors.transparent),
-                child: FooterTileCard(
-                  insets: EdgeInsets.symmetric(vertical: 0),
-                  padding: EdgeInsets.all(9),
-                  child: BottomNavigationBar(
-                    elevation: 0,
-                    showSelectedLabels: false,
-                    showUnselectedLabels: false,
-                    selectedItemColor: Color(0xFF57BD37),
-                    unselectedItemColor: Colors.white,
-                    type: BottomNavigationBarType.fixed,
-                    onTap: _onItemTapped,
-                    currentIndex: _selectedIndex,
-                    items: const <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
-                        icon: FaIcon(FontAwesomeIcons.home),
-                        label: 'Home',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: FaIcon(FontAwesomeIcons.leaf),
-                        label: 'Leaf',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: FaIcon(FontAwesomeIcons.shoppingCart),
-                        label: 'Noti',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: FaIcon(FontAwesomeIcons.book),
-                        label: 'Achi',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: FaIcon(FontAwesomeIcons.userAlt),
-                        label: 'Settings',
-                      ),
-                    ],
-                  ),
-                  color: Colors.yellow,
+    // return Scaffold(
+    //     body: Stack(
+    //   children: <Widget>[
+    //     _widgertOption.elementAt(_selectedIndex),
+    //     Align(
+    //         alignment: Alignment.bottomCenter,
+    //         child: Container(
+    //           height: 80,
+    //           child: Theme(
+    //             data:
+    //                 Theme.of(context).copyWith(canvasColor: Colors.transparent),
+    //             child: FooterTileCard(
+    //               insets: EdgeInsets.symmetric(vertical: 0),
+    //               padding: EdgeInsets.all(9),
+    //               child: BottomNavigationBar(
+    //                 elevation: 0,
+    //                 showSelectedLabels: false,
+    //                 showUnselectedLabels: false,
+    //                 selectedItemColor: Color(0xFF57BD37),
+    //                 unselectedItemColor: Colors.white,
+    //                 type: BottomNavigationBarType.fixed,
+    //                 onTap: _onItemTapped,
+    //                 currentIndex: _selectedIndex,
+    //                 items: const <BottomNavigationBarItem>[
+    //                   BottomNavigationBarItem(
+    //                     icon: FaIcon(FontAwesomeIcons.home),
+    //                     label: 'Home',
+
+    //                   ),
+    //                   BottomNavigationBarItem(
+    //                     icon: FaIcon(FontAwesomeIcons.leaf),
+    //                     label: 'Leaf',
+    //                   ),
+    //                   BottomNavigationBarItem(
+    //                     icon: FaIcon(FontAwesomeIcons.shoppingCart),
+    //                     label: 'Noti',
+    //                   ),
+    //                   BottomNavigationBarItem(
+    //                     icon: FaIcon(FontAwesomeIcons.book),
+    //                     label: 'Achi',
+    //                   ),
+    //                   BottomNavigationBarItem(
+    //                     icon: FaIcon(FontAwesomeIcons.userAlt),
+    //                     label: 'Settings',
+    //                   ),
+    //                 ],
+    //               ),
+    //               color: Colors.yellow,
+    //             ),
+    //           ),
+    //         ))
+    //   ],
+    // ));
+
+    return DefaultTabController(
+        length: 5,
+        child: Scaffold(
+          body: Stack(
+            children: <Widget>[
+              Expanded(
+                child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    Center(
+                      child: homePage(),
+                    ),
+                    Center(child: PlotAreaPage()),
+                    Center(child: MarketplacePage()),
+                    Center(child: AgroPlantPage()),
+                    Center(child: SettingPage()),
+                  ],
                 ),
               ),
-            ))
-      ],
-    ));
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                    height: 86,
+                    color: Colors.transparent,
+                    // constraints: BoxConstraints(maxHeight: 150.0),
+                    child: Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: TileCard(
+                          borderRadius: 50,
+                          color: Colors.yellow,
+                          insets: EdgeInsets.zero,
+                          child: TabBar(
+                            // isScrollable: true,
+                            labelPadding: EdgeInsets.symmetric(horizontal: 10),
+                            indicator: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            unselectedLabelColor: Colors.white,
+                            tabs: [
+                              Tab(
+                                child: FaIcon(FontAwesomeIcons.home),
+                              ),
+                              Tab(
+                                child: FaIcon(FontAwesomeIcons.leaf),
+                              ),
+                              Tab(
+                                child: FaIcon(FontAwesomeIcons.shoppingCart),
+                              ),
+                              Tab(
+                                child: FaIcon(FontAwesomeIcons.book),
+                              ),
+                              Tab(
+                                child: FaIcon(FontAwesomeIcons.userAlt),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )),
+              ),
+            ],
+          ),
+        ));
   }
 
   Widget homePage() {
@@ -432,6 +500,25 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
                                   i,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      return child;
+                                    }
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes
+                                            : null,
+                                      ),
+                                    );
+                                  },
                                   fit: BoxFit.cover,
                                   width: 1000,
                                   height: 135,
@@ -441,9 +528,11 @@ class _HomePageState extends State<HomePage> {
                                 alignment: Alignment.centerLeft,
                                 child: Column(
                                   children: <Widget>[
+                                    // Temperature
                                     Container(
                                       width: 80,
                                       child: TileCard(
+                                        borderRadius: 2,
                                         child: Column(
                                           children: [
                                             FaIcon(
@@ -460,9 +549,11 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
+                                    // Watering percentage
                                     Container(
                                       width: 80,
                                       child: TileCard(
+                                        borderRadius: 2,
                                         child: Column(
                                           children: [
                                             FaIcon(FontAwesomeIcons.tint,
@@ -674,8 +765,26 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(10),
                               child: Image.network(
                                 i,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  }
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value: loadingProgress
+                                                  .expectedTotalBytes !=
+                                              null
+                                          ? loadingProgress
+                                                  .cumulativeBytesLoaded /
+                                              loadingProgress.expectedTotalBytes
+                                          : null,
+                                    ),
+                                  );
+                                },
                                 fit: BoxFit.cover,
-                                // width: 1000,
+                                width: 200,
                                 // height: 1000,
                               ),
                             ),
@@ -727,6 +836,15 @@ class _HomePageState extends State<HomePage> {
                                             color: Color(0xFF57BD37),
                                             fontWeight: FontWeight.w500)),
                                   ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                GestureDetector(
+                                  child: Image.asset(
+                                    'assets/image/button/more_detail_btn.png',
+                                    width: 120,
+                                  ),
                                 )
                               ],
                             ),

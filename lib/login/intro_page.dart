@@ -109,7 +109,7 @@ class _AppIntroPageState extends State<AppIntroPage> {
             child: _currentPosition == 1.0
                 ? Image.asset('assets/image/button/start_btn.png')
                 : SizedBox(
-                    height: 70,
+                    height: 62,
                   ),
             onTap: () {
               Navigator.push(context,
@@ -185,7 +185,7 @@ class PageOne extends StatelessWidget {
                   fontSize: 23,
                   fontWeight: FontWeight.w600)),
           SizedBox(
-            height: 65,
+            height: 80,
           ),
         ],
       ),
@@ -206,10 +206,10 @@ class PageTwo extends StatelessWidget {
       children: <Widget>[
         Container(
           child: Image.asset('assets/image/logo.png'),
-          height: height*0.3,
+          height: height * 0.3,
         ),
         SizedBox(
-          height: height*0.01,
+          height: height * 0.01,
         ),
         Text(
           'Hero Agri ระบบที่ให้คำแนะนำการปลูก',

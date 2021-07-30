@@ -53,8 +53,8 @@ class _UserLoginPageState extends State<UserLoginPage> {
                     hintText: 'เบอร์โทรศัพท์ หรือ อีเมล',
                     filled: true,
                     fillColor: Colors.white,
-                    labelStyle: TextStyle(
-                        fontFamily: 'Anakotmai', fontWeight: FontWeight.w500),
+                    hintStyle: TextStyle(fontWeight: FontWeight.w500),
+                    labelStyle: TextStyle(fontWeight: FontWeight.w500),
                     enabledBorder: OutlineInputBorder(
                         // borderRadius: BorderRadius.circular(5.0)
                         borderSide: BorderSide(color: Colors.white)),
@@ -66,17 +66,20 @@ class _UserLoginPageState extends State<UserLoginPage> {
                 height: 20,
               ),
               Container(
-                color: Colors.white,
+                // color: Colors.white,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white),
                 child: PasswordField(
                     controller: widget.passwordTextEditingController,
                     hintText: 'รหัสผ่าน',
                     hintStyle: TextStyle(
                         fontFamily: 'Anakotmai', fontWeight: FontWeight.w500),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(50),
                         borderSide: BorderSide(color: Colors.white))),
               ),
               SizedBox(
