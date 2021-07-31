@@ -8,8 +8,8 @@ import 'package:hero_agri/agri_plot_location/create_plot.dart';
 // Project import
 
 class PlotAreaPage extends StatelessWidget {
-  const PlotAreaPage({Key key}) : super(key: key);
-
+  const PlotAreaPage({Key key, this.index}) : super(key: key);
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,30 +29,36 @@ class PlotAreaPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset('assets/image/plot_area_screen.png'),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Text('ยังไม่มีพื้นที่เพาะปลูก',
                   style: TextStyle(
                       fontFamily: 'Anakotmai',
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                       color: Colors.white)),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Text('กดปุ่มด้านล่างเพื่อเพิ่มพื้นที่เพาะปลูก',
                   style: TextStyle(
                       fontFamily: 'Anakotmai',
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                       color: Colors.white)),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               GestureDetector(
                 child: Image.asset('assets/image/button/Create_plot.png'),
                 onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CreateMyPlotPage()));
-                      print('alert chatbot');
-                    },
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CreateMyPlotPage()));
+                  print('alert chatbot');
+                },
               )
             ],
           ),

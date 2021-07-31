@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/card/tile_card.dart';
 import 'package:hero_agri/marketplace/marketplace_page.dart';
+import 'package:hero_agri/navigator_tab_bar.dart';
 import 'package:hero_agri/plot_action/plot_information.dart';
 
 class MyPlotManagement extends StatefulWidget {
@@ -278,10 +279,16 @@ class _MyPlotManagementState extends State<MyPlotManagement> {
                   )),
               TextButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => MarketplacePage()));
+                    Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
-                            builder: (context) => MarketplacePage()));
+                            builder: (context) => HomePageTabbar(
+                                  index: 2,
+                                )),
+                        (route) => false);
                   },
                   child: Image.asset(
                     'assets/image/button/find_production_factor_btn.png',

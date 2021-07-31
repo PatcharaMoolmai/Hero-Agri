@@ -4,6 +4,7 @@ import 'package:hero_agri/login/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hero_agri/navigator_tab_bar.dart';
 import 'package:passwordfield/passwordfield.dart';
 
 class UserLoginPage extends StatefulWidget {
@@ -106,7 +107,11 @@ class _UserLoginPageState extends State<UserLoginPage> {
                 child: Image.asset('assets/image/button/login_btn.png'),
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(
+                          builder: (context) => HomePageTabbar(
+                                index: 0,
+                              )),
+                      // MaterialPageRoute(builder: (context) => HomePage()),
                       (route) => false);
                 },
               ),

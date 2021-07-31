@@ -5,6 +5,7 @@ import 'package:hero_agri/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hero_agri/navigator_tab_bar.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -16,10 +17,9 @@ class MobileAuthenticatePage extends StatefulWidget {
 }
 
 class _MobileAuthenticatePageState extends State<MobileAuthenticatePage> {
-
   TextEditingController textEditingController = TextEditingController();
   StreamController<ErrorAnimationType> errorController;
-  
+
   bool hasError = false;
   String currentText = "";
   final formKey = GlobalKey<FormState>();
@@ -36,7 +36,6 @@ class _MobileAuthenticatePageState extends State<MobileAuthenticatePage> {
     super.dispose();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +79,7 @@ class _MobileAuthenticatePageState extends State<MobileAuthenticatePage> {
               height: 30,
             ),
             // Tel. number
-             Text(
+            Text(
               '+66 XXX-XXX-XXXX',
               style: TextStyle(
                   fontFamily: 'Anakotmai',
@@ -88,34 +87,34 @@ class _MobileAuthenticatePageState extends State<MobileAuthenticatePage> {
                   fontWeight: FontWeight.w600),
             ),
             // mobile authenticator pin form
-              Form(
-                key: formKey,
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 30),
-                    child: PinCodeTextField(
-                      appContext: context,
-                      // pastedTextStyle: TextStyle(
-                      //   color: Colors.green.shade600,
-                      //   fontWeight: FontWeight.bold,
-                      // ),
-                      length: 6,
-                      obscureText: true,
-                      // obscuringCharacter: '*',
-                      // obscuringWidget: FlutterLogo(
-                      //   size: 24,
-                      // ),
-                      blinkWhenObscuring: true,
-                      animationType: AnimationType.fade,
-                      // Validation
-                      validator: (v) {
-                        if (v.length < 3) {
-                          return "ต้องการรหัส OTP";
-                        } else {
-                          return null;
-                        }
-                      },
-                      pinTheme: PinTheme(
+            Form(
+              key: formKey,
+              child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
+                  child: PinCodeTextField(
+                    appContext: context,
+                    // pastedTextStyle: TextStyle(
+                    //   color: Colors.green.shade600,
+                    //   fontWeight: FontWeight.bold,
+                    // ),
+                    length: 6,
+                    obscureText: true,
+                    // obscuringCharacter: '*',
+                    // obscuringWidget: FlutterLogo(
+                    //   size: 24,
+                    // ),
+                    blinkWhenObscuring: true,
+                    animationType: AnimationType.fade,
+                    // Validation
+                    validator: (v) {
+                      if (v.length < 3) {
+                        return "ต้องการรหัส OTP";
+                      } else {
+                        return null;
+                      }
+                    },
+                    pinTheme: PinTheme(
                         // shape: PinCodeFieldShape.underline,
                         inactiveFillColor: Colors.transparent,
                         selectedFillColor: Colors.transparent,
@@ -127,41 +126,41 @@ class _MobileAuthenticatePageState extends State<MobileAuthenticatePage> {
                         // fieldWidth: 40,
                         // activeFillColor:
                         //     hasError ? Colors.blue.shade100 : Colors.white,
-                      ),
-                      cursorColor: Colors.black,
-                      animationDuration: Duration(milliseconds: 300),
-                      enableActiveFill: true,
-                      errorAnimationController: errorController,
-                      // Controller
-                      controller: textEditingController,
-                      keyboardType: TextInputType.number,
-                      // boxShadows: [
-                      //   BoxShadow(
-                      //     offset: Offset(0, 1),
-                      //     color: Colors.black12,
-                      //     blurRadius: 10,
-                      //   )
-                      // ],
-                      onCompleted: (v) {
-                        print("Completed");
-                      },
-                      // onTap: () {
-                      //   print("Pressed");
-                      // },
-                      onChanged: (value) {
-                        print(value);
-                        setState(() {
-                          currentText = value;
-                        });
-                      },
-                      beforeTextPaste: (text) {
-                        print("Allowing to paste $text");
-                        //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                        //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                        return true;
-                      },
-                    )),
-              ),
+                        ),
+                    cursorColor: Colors.black,
+                    animationDuration: Duration(milliseconds: 300),
+                    enableActiveFill: true,
+                    errorAnimationController: errorController,
+                    // Controller
+                    controller: textEditingController,
+                    keyboardType: TextInputType.number,
+                    // boxShadows: [
+                    //   BoxShadow(
+                    //     offset: Offset(0, 1),
+                    //     color: Colors.black12,
+                    //     blurRadius: 10,
+                    //   )
+                    // ],
+                    onCompleted: (v) {
+                      print("Completed");
+                    },
+                    // onTap: () {
+                    //   print("Pressed");
+                    // },
+                    onChanged: (value) {
+                      print(value);
+                      setState(() {
+                        currentText = value;
+                      });
+                    },
+                    beforeTextPaste: (text) {
+                      print("Allowing to paste $text");
+                      //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                      return true;
+                    },
+                  )),
+            ),
             SizedBox(
               height: 20,
             ),
@@ -170,10 +169,16 @@ class _MobileAuthenticatePageState extends State<MobileAuthenticatePage> {
             ),
             GestureDetector(
               child: Image.asset('assets/image/button/confirm_btn.png'),
-              onTap: (){
+              onTap: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                      (route) => false);
+                    MaterialPageRoute(
+                        builder: (context) => HomePageTabbar(
+                              index: 0,
+                            )),
+                    (route) => false);
+                // Navigator.of(context).pushAndRemoveUntil(
+                //   MaterialPageRoute(builder: (context) => HomePage()),
+                //   (route) => false);
               },
             ),
             SizedBox(

@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/card/tile_card.dart';
 import 'package:hero_agri/card/tile_expandable.dart';
+import 'package:hero_agri/navigator_tab_bar.dart';
 import 'package:hero_agri/plot_Action/manage_my_plot.dart';
 
 class CreatePlotCont extends StatefulWidget {
@@ -231,17 +232,27 @@ class _CreatePlotContState extends State<CreatePlotCont> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: BorderSide(color: Colors.white))),
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: GestureDetector(
                             child:
                                 Image.asset('assets/image/button/save_btn.png'),
                             onTap: () {
+                              // Code need refactor!!!
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ManageMyPlot()));
+                              // Navigator.of(context).pushAndRemoveUntil(
+                              //     MaterialPageRoute(
+                              //         builder: (context) => HomePageTabbar(
+                              //               index: 1,
+                              //               isPlotCreate: true,
+                              //             )),
+                              //     (route) => false);
                             },
                           ),
                         ),

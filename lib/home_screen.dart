@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/activity/activity_page.dart';
 import 'package:hero_agri/card/plot_example_card.dart';
 import 'package:hero_agri/main.dart';
+import 'package:hero_agri/navigator_tab_bar.dart';
 import 'package:hero_agri/plot_action/manage_my_plot.dart';
 
 // Project import
@@ -28,144 +29,80 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
 // Width, height aren't flexible rn
   @override
   Widget build(BuildContext context) {
-    // Linking Page to change bottom widget
-    List<Widget> _widgertOption = <Widget>[
-      homePage(),
-      PlotAreaPage(),
-      MarketplacePage(),
-      AgroPlantPage(),
-      SettingPage()
-    ];
-    // return Scaffold(
-    //     body: Stack(
-    //   children: <Widget>[
-    //     _widgertOption.elementAt(_selectedIndex),
-    //     Align(
-    //         alignment: Alignment.bottomCenter,
-    //         child: Container(
-    //           height: 80,
-    //           child: Theme(
-    //             data:
-    //                 Theme.of(context).copyWith(canvasColor: Colors.transparent),
-    //             child: FooterTileCard(
-    //               insets: EdgeInsets.symmetric(vertical: 0),
-    //               padding: EdgeInsets.all(9),
-    //               child: BottomNavigationBar(
-    //                 elevation: 0,
-    //                 showSelectedLabels: false,
-    //                 showUnselectedLabels: false,
-    //                 selectedItemColor: Color(0xFF57BD37),
-    //                 unselectedItemColor: Colors.white,
-    //                 type: BottomNavigationBarType.fixed,
-    //                 onTap: _onItemTapped,
-    //                 currentIndex: _selectedIndex,
-    //                 items: const <BottomNavigationBarItem>[
-    //                   BottomNavigationBarItem(
-    //                     icon: FaIcon(FontAwesomeIcons.home),
-    //                     label: 'Home',
-
-    //                   ),
-    //                   BottomNavigationBarItem(
-    //                     icon: FaIcon(FontAwesomeIcons.leaf),
-    //                     label: 'Leaf',
-    //                   ),
-    //                   BottomNavigationBarItem(
-    //                     icon: FaIcon(FontAwesomeIcons.shoppingCart),
-    //                     label: 'Noti',
-    //                   ),
-    //                   BottomNavigationBarItem(
-    //                     icon: FaIcon(FontAwesomeIcons.book),
-    //                     label: 'Achi',
-    //                   ),
-    //                   BottomNavigationBarItem(
-    //                     icon: FaIcon(FontAwesomeIcons.userAlt),
-    //                     label: 'Settings',
-    //                   ),
-    //                 ],
-    //               ),
-    //               color: Colors.yellow,
-    //             ),
-    //           ),
-    //         ))
-    //   ],
-    // ));
-
-    return DefaultTabController(
-        length: 5,
-        child: Scaffold(
-          body: Stack(
+    return ListView(
+      children: <Widget>[
+        AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              // Expanded(
-              TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  Center(
-                    child: homePage(),
-                  ),
-                  Center(child: PlotAreaPage()),
-                  Center(child: MarketplacePage()),
-                  Center(child: AgroPlantPage()),
-                  Center(child: SettingPage()),
-                ],
+              Container(
+                child: IconButton(
+                    icon: Icon(Icons.file_copy),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChatbotPage()));
+                      print('alert chatbot');
+                    }),
               ),
-              // ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                    height: 86,
-                    color: Colors.transparent,
-                    // constraints: BoxConstraints(maxHeight: 150.0),
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: TileCard(
-                          borderRadius: 50,
-                          color: Colors.yellow,
-                          insets: EdgeInsets.zero,
-                          child: TabBar(
-                            // isScrollable: true,
-                            labelPadding: EdgeInsets.symmetric(horizontal: 10),
-                            indicator: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            unselectedLabelColor: Colors.white,
-                            tabs: [
-                              Tab(
-                                child: FaIcon(FontAwesomeIcons.home),
-                              ),
-                              Tab(
-                                child: FaIcon(FontAwesomeIcons.leaf),
-                              ),
-                              Tab(
-                                child: FaIcon(FontAwesomeIcons.shoppingCart),
-                              ),
-                              Tab(
-                                child: FaIcon(FontAwesomeIcons.book),
-                              ),
-                              Tab(
-                                child: FaIcon(FontAwesomeIcons.userAlt),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )),
+              Image.asset(
+                'assets/image/logo.png',
+                height: 50,
+              ),
+              Container(
+                child: IconButton(
+                    icon: Icon(Icons.notifications),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                      print('alert notification');
+                    }),
               ),
             ],
           ),
-        ));
+          backgroundColor: Color(0xFF57BD37),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        buildNotification(),
+        SizedBox(
+          height: 5,
+        ),
+        plotExample(),
+        SizedBox(
+          height: 5,
+        ),
+        manageActivity(),
+        SizedBox(
+          height: 5,
+        ),
+        manageMyPlot(),
+        SizedBox(
+          height: 5,
+        ),
+        GestureDetector(
+          child: buildAgriNews(),
+          // onTap: () {
+          //   Navigator.push(context,
+          //       MaterialPageRoute(builder: (context) => AgroNewsPage()));
+          // },
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        adsPromotion(),
+        SizedBox(
+          height: 100,
+        ),
+      ],
+    );
   }
 
   Widget homePage() {
@@ -434,8 +371,16 @@ class _HomePageState extends State<HomePage> {
                   'assets/image/button/plot_manager_btn.png',
                 ),
                 onTap: () {
+                  // need more code refactor !!!
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ManageMyPlot()));
+                  // Navigator.of(context).pushAndRemoveUntil(
+                  //     MaterialPageRoute(
+                  //         builder: (context) => HomePageTabbar(
+                  //               index: 1,
+                  //               isPlotCreate: true,
+                  //             )),
+                  //     (route) => false);
                 },
               )
             ],

@@ -144,19 +144,23 @@ class _CustomizePlotState extends State<CustomizePlot> {
             ),
           ),
           TileCard(
+              borderRadius: 20,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              insets: EdgeInsets.symmetric(horizontal: 0),
               child: Column(
                 children: <Widget>[
-                  plantDetail(),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: plantDetail(),
+                  ),
                   SizedBox(
-                    height: 15,
+                    height: 20,
                   ),
                   Divider(
-                    color: Color(0xFF2E964C),
+                    color: Colors.green[700],
+                    thickness: 2,
+                    height: 0,
                   ),
-                  // Text(activityCaring[0]['th_name'].toString()),
-                  // Text(activityCaring[1]['th_name'].toString()),
-                  // Text(activityCaring[2]['th_name'].toString()),
 
                   // read json flexible (unsuccess rn)
                   // FutureBuilder(
@@ -175,6 +179,7 @@ class _CustomizePlotState extends State<CustomizePlot> {
                   //         );
                   //       }
                   //     }),
+
                   // Method was call on null in THIS FIX RN!!!!
                   Container(
                     height: height * 0.58,
@@ -182,15 +187,6 @@ class _CustomizePlotState extends State<CustomizePlot> {
                       children: [activityTable()],
                     ),
                   )
-
-                  // TextButton(
-                  //     child: Text('Plot action (Temporaly)'),
-                  //     onPressed: () {
-                  //       Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //               builder: (context) => MyPlotManagement()));
-                  //     })
                 ],
               ))
         ],
@@ -305,22 +301,23 @@ class _CustomizePlotState extends State<CustomizePlot> {
               width: 1,
               color: Color(0xFF57BD37).withOpacity(0.7),
             )),
+            columnWidths: {
+              0: FractionColumnWidth(0.3),
+              1: FractionColumnWidth(0.7)
+            },
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
             children: [
-          for (int i = 0; i < 52; i++)
-            TableRow(children: [
-              TableCell(
-                  child: Container(
-                // This week check
-                color: i == 10 ? Colors.green[700] : Colors.white,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Flexible(
-                        flex: 8,
-                        // with time checking
-                        child: new Text(
+              for (int i = 0; i < 52; i++)
+                TableRow(
+                    decoration: BoxDecoration(
+                      // week now!
+                      color: i == 10 ? Colors.green[700] : Colors.white,
+                    ),
+                    children: [
+                      TableCell(
+                          child: Container(
+                        // This week check
+                        child: Text(
                           'สัปดาห์ที่ ${i + 1}',
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
@@ -330,31 +327,33 @@ class _CustomizePlotState extends State<CustomizePlot> {
                                   : Color(0xFF57BD37)
                                       .withOpacity(i < 10 ? 0.5 : 1)),
                         ),
-                      ),
-                      SizedBox(
-                        width: width * 0.03,
-                      ),
-                      // Container(
-                      //     // height: height * 0.15,
-                      //     child: VerticalDivider(color: Color(0xFF57BD37))),
-                      Flexible(
-                          flex: 16,
-                          child: GestureDetector(
-                            child: activityDetail(i),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          MyPlotManagement()));
-                            },
-                          ))
-                    ],
-                  ),
-                ),
-              )),
-            ])
-        ]));
+                      )),
+                      TableCell(
+                          child: Container(
+                        // This week check
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          child: Row(
+                            children: <Widget>[
+                              Flexible(
+                                  flex: 16,
+                                  child: GestureDetector(
+                                    child: activityDetail(i),
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MyPlotManagement()));
+                                    },
+                                  ))
+                            ],
+                          ),
+                        ),
+                      )),
+                    ])
+            ]));
   }
 
   Widget activityDetail(int index) {
