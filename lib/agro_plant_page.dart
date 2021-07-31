@@ -22,7 +22,7 @@ class AgroPlantPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'หัวข้อ ${plant_count+1}',
+                'หัวข้อ ${plant_count + 1}',
                 style: TextStyle(
                     fontFamily: 'Anakotmai',
                     fontSize: 25,
@@ -42,31 +42,47 @@ class AgroPlantPage extends StatelessWidget {
       );
       plant_count++;
     }
-    return Container(
-      child: Column(
-        children: <Widget>[
-          AppBar(
-            title: Text(
-              'นวัตกรรมการเกษตร 52 สัปดาห์',
-              style: TextStyle(
-                  fontFamily: 'Anakotmai',
-                  color: Colors.amber,
-                  fontWeight: FontWeight.w500),
-            ),
-            backgroundColor: Color(0xFF57BD37),
-            centerTitle: true,
-          ),
-          Expanded(
-            // height: 500,
-            child: ListView(
-            children: weekPlantList,
-          ),
-          ),
-          SizedBox(
-            height: 80,
-          )
-        ],
+    return Scaffold(
+      // backgroundColor: Colors.green,
+      appBar: AppBar(
+        title: Text(
+          'นวัตกรรมการเกษตร 52 สัปดาห์',
+          style: TextStyle(
+              fontFamily: 'Anakotmai',
+              color: Colors.amber,
+              fontWeight: FontWeight.w500),
+        ),
+        backgroundColor: Color(0xFF57BD37),
+        centerTitle: true,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.yellow,
+            Colors.green,
+          ],
+        )),
+        child: ListView(
+          children: weekPlantList,
+        ),
       ),
     );
+    // Container(
+    //   child: Column(
+    //     children: <Widget>[
+
+    //       Expanded(
+    //         // height: 500,
+    //         child: ,
+    //       ),
+    //       SizedBox(
+    //         height: 80,
+    //       )
+    //     ],
+    //   ),
+    // );
   }
 }

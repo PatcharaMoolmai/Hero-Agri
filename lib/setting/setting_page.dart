@@ -29,8 +29,15 @@ class SettingPage extends StatelessWidget {
                 height: 20,
               ),
               Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(40),
+                        topLeft: Radius.circular(40))),
                 // height: 700,
                 child: TileCard(
+                    elevation: 0,
+                    borderRadius: 40,
                     color: Colors.grey[100],
                     padding: EdgeInsets.all(0),
                     insets: EdgeInsets.all(0),
