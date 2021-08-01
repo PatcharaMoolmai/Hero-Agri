@@ -88,13 +88,16 @@ class _ActivityPageState extends State<ActivityPage> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     final List<String> activityList = [
-      'การดูแลรักษา',
-      'การป้องกัน',
+      'การใส่ปุ๋ยพืช',
+      'การรดน้ำพืช',
       'การพยากรณ์',
       'กิจกรรมพิเศษ'
     ];
     final List<String> activityIconPic = [
-      
+      'assets/icons/fertilizer_sack.png',
+      'assets/icons/watering_can.png',
+      'assets/icons/weathering.png',
+      'assets/icons/foggy.png',
     ];
     return Padding(
       padding: EdgeInsets.all(15),
@@ -170,19 +173,31 @@ class _ActivityPageState extends State<ActivityPage> {
                                 TileCard(
                                     elevation: 0,
                                     insets: EdgeInsets.symmetric(
-                                        vertical: 15, horizontal: 10),
-                                    child: ListTile(
-                                      title: Text(
-                                        '$i',
-                                        style: TextStyle(
-                                          fontFamily: 'Anakotmai',
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      leading:
-                                          FaIcon(FontAwesomeIcons.dotCircle),
-                                    ))
+                                        vertical: 5, horizontal: 0),
+                                    child: TileCard(
+                                        elevation: 0,
+                                        borderRadius: 3,
+                                        insets: EdgeInsets.zero,
+                                        child: Row(
+                                          children: [
+                                            Image.asset(
+                                              activityIconPic[
+                                                  activityList.indexOf(i)],
+                                              scale: 15,
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              '$i',
+                                              style: TextStyle(
+                                                fontSize: 24,
+                                                fontFamily: 'Anakotmai',
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        )))
                               ],
                             ),
                             padding: EdgeInsets.all(2),
@@ -277,56 +292,8 @@ class _ActivityPageState extends State<ActivityPage> {
                                     ],
                                   ),
                                 ),
-                                TileCard(
-                                    elevation: 0,
-                                    color: Color(0xFFE4F3DA),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Flexible(
-                                            child: Text(
-                                          'แปลงย่อยที่ 2',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        )),
-                                        Flexible(
-                                            child: Column(
-                                          children: <Widget>[
-                                            Text(
-                                              'จำนวน',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            Text(
-                                              'x กก.',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color(0xFF57BD37)),
-                                            )
-                                          ],
-                                        )),
-                                        Flexible(
-                                            child: Column(
-                                          children: <Widget>[
-                                            Text(
-                                              'ประเภท',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            Text(
-                                              'ชีวภาพ',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color(0xFF57BD37)),
-                                            )
-                                          ],
-                                        )),
-                                      ],
-                                    )),
+                                // sub-plot list
+                                subPlot()
                               ],
                             ),
                           )),
@@ -375,9 +342,17 @@ class _ActivityPageState extends State<ActivityPage> {
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TileCard(
-                    child: Text('รูปต้นไม้'),
-                    color: Colors.lightGreen,
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Color(0xFF57BD37).withOpacity(0.5),
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundColor: Colors.white,
+                      child: Image.asset(
+                        'assets/icons/durian.png',
+                        scale: 12,
+                      ),
+                    ),
                   ),
                   Column(
                     children: [
@@ -412,9 +387,17 @@ class _ActivityPageState extends State<ActivityPage> {
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TileCard(
-                    child: Text('รูปต้นไม้'),
-                    color: Colors.lightGreen,
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Color(0xFF57BD37).withOpacity(0.5),
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundColor: Colors.white,
+                      child: Image.asset(
+                        'assets/icons/durian.png',
+                        scale: 12,
+                      ),
+                    ),
                   ),
                   Column(
                     children: [
@@ -453,9 +436,17 @@ class _ActivityPageState extends State<ActivityPage> {
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TileCard(
-                    child: Text('รูปต้นไม้'),
-                    color: Colors.lightGreen,
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Color(0xFF57BD37).withOpacity(0.5),
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundColor: Colors.white,
+                      child: Image.asset(
+                        'assets/icons/grapefruit-3.png',
+                        scale: 12,
+                      ),
+                    ),
                   ),
                   Column(
                     children: [
@@ -490,9 +481,17 @@ class _ActivityPageState extends State<ActivityPage> {
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TileCard(
-                    child: Text('รูปต้นไม้'),
-                    color: Colors.lightGreen,
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Color(0xFF57BD37).withOpacity(0.5),
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundColor: Colors.white,
+                      child: Image.asset(
+                        'assets/icons/grapefruit-3.png',
+                        scale: 12,
+                      ),
+                    ),
                   ),
                   Column(
                     children: [
@@ -531,9 +530,17 @@ class _ActivityPageState extends State<ActivityPage> {
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TileCard(
-                    child: Text('รูปต้นไม้'),
-                    color: Colors.lightGreen,
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Color(0xFF57BD37).withOpacity(0.5),
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundColor: Colors.white,
+                      child: Image.asset(
+                        'assets/icons/longan.png',
+                        scale: 12,
+                      ),
+                    ),
                   ),
                   Column(
                     children: [
@@ -566,5 +573,65 @@ class _ActivityPageState extends State<ActivityPage> {
         )
       ],
     ));
+  }
+
+  Widget subPlot() {
+    List<Widget> subPlotList = [];
+    for (var i = 0; i < 4; i++) {
+      subPlotList.add(
+        TileCard(
+            elevation: 0,
+            color: Color(0xFFE4F3DA),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Flexible(
+                    child: Text(
+                  'แปลงย่อยที่ ${i + 2}',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                )),
+                Flexible(
+                    child: Column(
+                  children: <Widget>[
+                    Text(
+                      'จำนวน',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      'x กก.',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF57BD37)),
+                    )
+                  ],
+                )),
+                Flexible(
+                    child: Column(
+                  children: <Widget>[
+                    Text(
+                      'ประเภท',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      'ชีวภาพ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF57BD37)),
+                    )
+                  ],
+                )),
+              ],
+            )),
+      );
+    }
+    return Column(
+      children: subPlotList,
+    );
   }
 }

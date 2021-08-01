@@ -239,10 +239,16 @@ class _HomePageState extends State<HomePage> {
   Widget manageActivity() {
     final double width = MediaQuery.of(context).size.width;
     final List<String> activityList = [
-      'การดูแลรักษา',
-      'การป้องกัน',
+      'การใส่ปุ๋ยพืช',
+      'การรดน้ำพืช',
       'การพยากรณ์',
       'กิจกรรมพิเศษ'
+    ];
+    final List<String> activityIconPic = [
+      'assets/icons/fertilizer_sack.png',
+      'assets/icons/watering_can.png',
+      'assets/icons/weathering.png',
+      'assets/icons/foggy.png',
     ];
     return Padding(
       padding: EdgeInsets.zero,
@@ -311,17 +317,29 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                                 TileCard(
-                                  elevation: 0,
-                                  insets: EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 10),
-                                  child: Text(
-                                    '$i',
-                                    style: TextStyle(
-                                      fontFamily: 'Anakotmai',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                )
+                                    elevation: 0,
+                                    borderRadius: 3,
+                                    insets: EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        Image.asset(
+                                          activityIconPic[
+                                              activityList.indexOf(i)],
+                                          scale: 30,
+                                        ),
+                                        // SizedBox(
+                                        //   width: 10,
+                                        // ),
+                                        Text(
+                                          '$i',
+                                          style: TextStyle(
+                                            fontFamily: 'Anakotmai',
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ))
                               ],
                             ),
                             managActivityList()
@@ -411,7 +429,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget plotExample() {
     final double width = MediaQuery.of(context).size.width;
-    final List<String> netSrcImage = [
+    final List<String> plotExamplePic = [
       'https://static1.bigstockphoto.com/2/5/1/large1500/152442050.jpg',
       'https://www.maxpixels.net/static/photo/1x/Nature-Zucchini-Garden-Plant-Leaf-Garden-Plot-1002528.jpg',
       'https://www.thaiticketmajor.com/variety/img_content/imgeditor/3(443).jpg',
@@ -431,6 +449,13 @@ class _HomePageState extends State<HomePage> {
       'อำเภอ ค จังหวัด ค',
       'อำเภอ ง จังหวัด ง',
       'อำเภอ จ จังหวัด จ',
+    ];
+    final List<String> plotFruitIcon = [
+      'assets/icons/durian.png',
+      'assets/icons/grapefruit-3.png',
+      'assets/icons/durian.png',
+      'assets/icons/longan.png',
+      'assets/icons/longan.png',
     ];
     return Padding(
       padding: EdgeInsets.zero,
@@ -457,7 +482,7 @@ class _HomePageState extends State<HomePage> {
               // initialPage: 1,
               // autoPlay: true,
             ),
-            items: netSrcImage.map((i) {
+            items: plotExamplePic.map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
@@ -552,10 +577,18 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               // mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(50),
-                                  child: FaIcon(FontAwesomeIcons.leaf,
-                                      color: Color(0xFF57BD37)),
+                                CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor:
+                                      Color(0xFF57BD37).withOpacity(0.5),
+                                  child: CircleAvatar(
+                                    radius: 23,
+                                    backgroundColor: Colors.white,
+                                    child: Image.asset(
+                                      plotFruitIcon[plotExamplePic.indexOf(i)],
+                                      scale: 15,
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 20,
@@ -564,7 +597,7 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      '${plotOwnerName[netSrcImage.indexOf(i)]}',
+                                      '${plotOwnerName[plotExamplePic.indexOf(i)]}',
                                       style: TextStyle(
                                           fontFamily: 'Anakotmai',
                                           fontSize: 20,
@@ -572,7 +605,7 @@ class _HomePageState extends State<HomePage> {
                                           color: Colors.amber),
                                     ),
                                     Text(
-                                      '${plotLocation[netSrcImage.indexOf(i)]}',
+                                      '${plotLocation[plotExamplePic.indexOf(i)]}',
                                       style: TextStyle(
                                           fontFamily: 'Anakotmai',
                                           fontSize: 15,
@@ -833,7 +866,7 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       ),
-                      padding: EdgeInsets.all(2),
+                      padding: EdgeInsets.all(10),
                     ),
                   );
                 },
@@ -871,7 +904,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Text(
-                'แปลงที่ $plotCount',
+                'แปลงที่ ${plotCount + 1}',
                 style: TextStyle(
                     fontFamily: 'Anakotmai',
                     fontWeight: FontWeight.w500,
