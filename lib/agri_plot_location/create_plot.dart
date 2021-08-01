@@ -81,6 +81,7 @@ class _CreateMyPlotPageState extends State<CreateMyPlotPage> {
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                   TileCard(
+                    borderRadius: 0,
                     insets: EdgeInsets.all(20),
                     padding: EdgeInsets.zero,
                     elevation: 0,

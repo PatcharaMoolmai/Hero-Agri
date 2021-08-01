@@ -9,7 +9,7 @@ class TileCard extends StatelessWidget {
     this.padding =
         const EdgeInsets.only(right: 8.0, left: 8.0, top: 4.0, bottom: 4.0),
     this.insets = const EdgeInsets.all(5.0),
-    this.elevation = 8.0,
+    this.elevation = 7.0,
     this.borderRadius = 10.0,
   });
 
@@ -26,7 +26,7 @@ class TileCard extends StatelessWidget {
         padding: padding,
         child: Material(
           elevation: elevation,
-          shadowColor: Colors.black45,
+          shadowColor: Color(0xFF2B7100).withOpacity(0.7),
           borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
           color: color ?? Theme.of(context).colorScheme.surface,
           child: Container(

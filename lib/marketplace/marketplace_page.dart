@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hero_agri/marketplace/shopping_cart.dart';
 
 // Project import
@@ -55,7 +56,7 @@ class MarketplacePage extends StatelessWidget {
                     filled: true,
                     fillColor: Color(0xFFEEEEEE),
                     suffixIcon: Icon(
-                      Icons.search,
+                      FontAwesomeIcons.search,
                       color: Color(0xFF57BD37),
                     ),
                     labelStyle: TextStyle(

@@ -40,20 +40,6 @@ class _ActivityPageState extends State<ActivityPage> {
               },
             ),
             backgroundColor: Color(0xFF57BD37),
-            // bottom: TabBar(
-            //   indicator: BoxDecoration(color: Colors.white),
-            //   tabs: <Widget>[
-            //     Tab(
-            //       child: Text('หมวดหมู่กิจกรรม'),
-            //     ),
-            //     Tab(
-            //       child: Text('พื้นที่ของฉัน'),
-            //     ),
-            //     Tab(
-            //       child: Text('พืช'),
-            //     ),
-            //   ],
-            // ),
           ),
           body: Column(
             children: <Widget>[
@@ -62,10 +48,7 @@ class _ActivityPageState extends State<ActivityPage> {
                   child: Padding(
                     padding: EdgeInsets.all(10),
                     child: Material(
-                      // color: Colors.indigo,
-
                       child: TabBar(
-                        // isScrollable: true,
                         labelPadding: EdgeInsets.symmetric(horizontal: 10),
                         indicator: BoxDecoration(
                           color: Colors.green,
@@ -110,6 +93,9 @@ class _ActivityPageState extends State<ActivityPage> {
       'การพยากรณ์',
       'กิจกรรมพิเศษ'
     ];
+    final List<String> activityIconPic = [
+      
+    ];
     return Padding(
       padding: EdgeInsets.all(15),
       child: Column(
@@ -130,7 +116,7 @@ class _ActivityPageState extends State<ActivityPage> {
                 // enlargeCenterPage: true,
                 enableInfiniteScroll: false,
                 height: height * 0.7,
-                // initialPage: 1,
+                initialPage: widget.index,
                 // autoPlay: true,
               ),
               items: activityList.map((i) {

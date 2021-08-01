@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
 // Width, height aren't flexible rn
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
     return ListView(
       children: <Widget>[
         AppBar(
@@ -73,19 +74,27 @@ class _HomePageState extends State<HomePage> {
         ),
         buildNotification(),
         SizedBox(
-          height: 5,
+          height: 20,
         ),
         plotExample(),
         SizedBox(
-          height: 5,
+          height: 15,
         ),
         manageActivity(),
-        SizedBox(
-          height: 5,
+        Padding(
+          padding: EdgeInsets.all(20),
+          child: Divider(
+            color: Color(0xFFF4C05E).withOpacity(0.5),
+            thickness: 2,
+          ),
         ),
         manageMyPlot(),
-        SizedBox(
-          height: 5,
+        Padding(
+          padding: EdgeInsets.all(20),
+          child: Divider(
+            color: Color(0xFFF4C05E).withOpacity(0.5),
+            thickness: 2,
+          ),
         ),
         GestureDetector(
           child: buildAgriNews(),
@@ -94,12 +103,16 @@ class _HomePageState extends State<HomePage> {
           //       MaterialPageRoute(builder: (context) => AgroNewsPage()));
           // },
         ),
-        SizedBox(
-          height: 5,
+        Padding(
+          padding: EdgeInsets.all(20),
+          child: Divider(
+            color: Color(0xFFF4C05E).withOpacity(0.5),
+            thickness: 2,
+          ),
         ),
         adsPromotion(),
         SizedBox(
-          height: 100,
+          height: height * 0.1,
         ),
       ],
     );
@@ -224,6 +237,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget manageActivity() {
+    final double width = MediaQuery.of(context).size.width;
     final List<String> activityList = [
       'การดูแลรักษา',
       'การป้องกัน',
@@ -231,34 +245,38 @@ class _HomePageState extends State<HomePage> {
       'กิจกรรมพิเศษ'
     ];
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            'กิจกรรม',
-            style: TextStyle(
-                fontFamily: 'Anakotmai',
-                fontSize: 22,
-                fontWeight: FontWeight.w500),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.15),
+            child: Text(
+              'กิจกรรม',
+              style: TextStyle(
+                  fontFamily: 'Anakotmai',
+                  fontSize: 22,
+                  color: Color(0xFF346241),
+                  fontWeight: FontWeight.w500),
+            ),
           ),
-          GestureDetector(
-            child: CarouselSlider(
-              options: CarouselOptions(
-                  aspectRatio: 2.0,
-                  // enlargeCenterPage: true,
-                  enableInfiniteScroll: false,
-                  height: 220
-                  // initialPage: 1,
-                  // autoPlay: true,
-                  ),
-              items: activityList.map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                        child: Container(
+          CarouselSlider(
+            options: CarouselOptions(
+                aspectRatio: 2.0,
+                // enlargeCenterPage: true,
+                enableInfiniteScroll: false,
+                height: 220
+                // initialPage: 1,
+                // autoPlay: true,
+                ),
+            items: activityList.map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return GestureDetector(
+                    child: Container(
                       child: TileCard(
+                        borderRadius: 20,
                         insets: EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -309,86 +327,90 @@ class _HomePageState extends State<HomePage> {
                             managActivityList()
                           ],
                         ),
-                        padding: EdgeInsets.all(2),
+                        padding: EdgeInsets.symmetric(horizontal: 7),
                         color: Color(0xFF57BD37),
                       ),
-                    ));
-                  },
-                );
-              }).toList(),
-            ),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ActivityPage()));
-            },
-          )
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ActivityPage(
+                                    index: activityList.indexOf(i),
+                                  )));
+                    },
+                  );
+                },
+              );
+            }).toList(),
+          ),
         ],
       ),
     );
   }
 
   Widget manageMyPlot() {
+    final double height = MediaQuery.of(context).size.height;
     return Container(
-      height: 150,
+      height: height * 0.13,
+      alignment: Alignment.center,
       child: TileCard(
-          padding: EdgeInsets.all(20),
-          insets: EdgeInsets.all(5),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                'assets/image/plot_manager.png',
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('กิจกรรม',
-                      style: TextStyle(
-                          fontFamily: 'Anakotmai',
-                          fontSize: 15,
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500)),
-                  Text('แปลงปลูกของฉัน',
-                      style: TextStyle(
-                          fontFamily: 'Anakotmai',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600)),
-                  Text('จัดการแปลงปลูกพืชของคุณ',
-                      style: TextStyle(
-                          fontFamily: 'Anakotmai',
-                          fontSize: 15,
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500)),
-                ],
-              ),
-              GestureDetector(
-                child: Image.asset(
-                  'assets/image/button/plot_manager_btn.png',
-                ),
-                onTap: () {
-                  // need more code refactor !!!
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ManageMyPlot()));
-                  // Navigator.of(context).pushAndRemoveUntil(
-                  //     MaterialPageRoute(
-                  //         builder: (context) => HomePageTabbar(
-                  //               index: 1,
-                  //               isPlotCreate: true,
-                  //             )),
-                  //     (route) => false);
-                },
-              )
-            ],
-          )),
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Image.asset(
+            'assets/image/plot_manager.png',
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('กิจกรรม',
+                    style: TextStyle(
+                        fontFamily: 'Anakotmai',
+                        fontSize: 15,
+                        color: Colors.grey[400],
+                        fontWeight: FontWeight.w500)),
+                Text('แปลงปลูกของฉัน',
+                    style: TextStyle(
+                        fontFamily: 'Anakotmai',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600)),
+                Text('จัดการแปลงปลูกพืชของคุณ',
+                    style: TextStyle(
+                        fontFamily: 'Anakotmai',
+                        fontSize: 15,
+                        color: Colors.grey[400],
+                        fontWeight: FontWeight.w500)),
+              ],
+            ),
+          ),
+          GestureDetector(
+            child: Image.asset(
+              'assets/image/button/plot_manager_btn.png',
+            ),
+            onTap: () {
+              // need more code refactor !!!
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ManageMyPlot()));
+              // Navigator.of(context).pushAndRemoveUntil(
+              //     MaterialPageRoute(
+              //         builder: (context) => HomePageTabbar(
+              //               index: 1,
+              //               isPlotCreate: true,
+              //             )),
+              //     (route) => false);
+            },
+          )
+        ],
+      )),
     );
   }
 
   Widget plotExample() {
+    final double width = MediaQuery.of(context).size.width;
     final List<String> netSrcImage = [
       'https://static1.bigstockphoto.com/2/5/1/large1500/152442050.jpg',
       'https://www.maxpixels.net/static/photo/1x/Nature-Zucchini-Garden-Plant-Leaf-Garden-Plot-1002528.jpg',
@@ -411,16 +433,20 @@ class _HomePageState extends State<HomePage> {
       'อำเภอ จ จังหวัด จ',
     ];
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            'สวนตัวอย่างในพื้นที่โซน',
-            style: TextStyle(
-                fontFamily: 'Anakotmai',
-                fontSize: 22,
-                fontWeight: FontWeight.w500),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.15),
+            child: Text(
+              'สวนตัวอย่างในพื้นที่โซน',
+              style: TextStyle(
+                  fontFamily: 'Anakotmai',
+                  fontSize: 22,
+                  color: Color(0xFF346241),
+                  fontWeight: FontWeight.w500),
+            ),
           ),
           CarouselSlider(
             options: CarouselOptions(
@@ -436,6 +462,7 @@ class _HomePageState extends State<HomePage> {
                 builder: (BuildContext context) {
                   return Container(
                     child: TileCard(
+                      borderRadius: 20,
                       insets: EdgeInsets.zero,
                       child: Column(
                         children: <Widget>[
@@ -571,24 +598,30 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildAgriNews() {
+    final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            'ข่าวสารเกษตรกร',
-            style: TextStyle(
-                fontFamily: 'Anakotmai',
-                fontSize: 22,
-                fontWeight: FontWeight.w500),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.15),
+            child: Text(
+              'ข่าวสารเกษตรกร',
+              style: TextStyle(
+                  fontFamily: 'Anakotmai',
+                  fontSize: 22,
+                  color: Color(0xFF346241),
+                  fontWeight: FontWeight.w500),
+            ),
           ),
           CarouselSlider(
             options: CarouselOptions(
                 aspectRatio: 2.0,
                 // enlargeCenterPage: true,
                 enableInfiniteScroll: false,
-                height: 95
+                height: height * 0.13
                 // initialPage: 1,
                 // autoPlay: true,
                 ),
@@ -600,14 +633,13 @@ class _HomePageState extends State<HomePage> {
                     // color: Colors.lightGreen[400],
                     child: Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         // crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            // mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
                                 'หัวข้อข่าว $i',
@@ -615,7 +647,7 @@ class _HomePageState extends State<HomePage> {
                                     fontFamily: 'Anakotmai',
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20,
-                                    color: Colors.green),
+                                    color: Colors.amber),
                               ),
                               Text(
                                 'เนื้อหาย่อ $i',
@@ -640,7 +672,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    padding: EdgeInsets.all(2),
+                    padding: EdgeInsets.symmetric(horizontal: 7, vertical: 5),
                   ));
                 },
               );
@@ -652,6 +684,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget adsPromotion() {
+    final double width = MediaQuery.of(context).size.width;
     final List<String> productPicList = [
       'https://www.dronezon.com/wp-content/uploads/2014/10/DJI-Phantom-2-Vision-Plus-e1580563366975.jpg.webp',
       'https://th-test-11.slatic.net/shop/5ba518d78718024fcc1d4d8dcca4a0c2.jpeg_2200x2200q80.jpg_.webp',
@@ -674,16 +707,20 @@ class _HomePageState extends State<HomePage> {
       'ร้าน ค',
     ];
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            'โปรโมชั่นสินค้าแนะนำ',
-            style: TextStyle(
-                fontFamily: 'Anakotmai',
-                fontSize: 22,
-                fontWeight: FontWeight.w500),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.15),
+            child: Text(
+              'โปรโมชั่นสินค้าแนะนำ',
+              style: TextStyle(
+                  fontFamily: 'Anakotmai',
+                  fontSize: 22,
+                  color: Color(0xFF346241),
+                  fontWeight: FontWeight.w500),
+            ),
           ),
           CarouselSlider(
             options: CarouselOptions(
