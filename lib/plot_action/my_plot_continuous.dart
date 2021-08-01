@@ -10,8 +10,11 @@ import 'package:hero_agri/navigator_tab_bar.dart';
 import 'package:hero_agri/plot_action/plot_information.dart';
 
 class MyPlotManagement extends StatefulWidget {
-  const MyPlotManagement({Key key}) : super(key: key);
+  const MyPlotManagement({Key key, this.plotIndex, this.plotWeekIndex})
+      : super(key: key);
 
+  final int plotIndex;
+  final int plotWeekIndex;
   @override
   _MyPlotManagementState createState() => _MyPlotManagementState();
 }
@@ -52,7 +55,7 @@ class _MyPlotManagementState extends State<MyPlotManagement> {
                 ],
               )),
           SizedBox(
-            height: height * 0.1,
+            height: height * 0.05,
           ),
           GestureDetector(
             child: Image.asset('assets/image/button/add_activity_btn.png'),
@@ -90,7 +93,7 @@ class _MyPlotManagementState extends State<MyPlotManagement> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'แปลงย่อยที่ 1',
+                      'แปลงย่อยที่ ${widget.plotIndex + 1}',
                       style: TextStyle(
                           fontSize: 18,
                           color: Color(0xFF57BD37),
@@ -206,98 +209,130 @@ class _MyPlotManagementState extends State<MyPlotManagement> {
   Widget activitySection() {
     final double height = MediaQuery.of(context).size.height;
     return Container(
-      height: height * 0.4,
-      child: ListView(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  leading: FaIcon(
-                    FontAwesomeIcons.dotCircle,
-                    color: Color(0xFF57BD37),
+        height: height * 0.5,
+        child: Column(
+          children: [
+            Container(
+              height: height * 0.4,
+              child: ListView(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          leading: FaIcon(
+                            FontAwesomeIcons.dotCircle,
+                            color: Color(0xFF57BD37),
+                          ),
+                          title: Text(
+                            'การดูแลรักษา',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 20),
+                          ),
+                          subtitle:
+                              Text('สัปดาห์ที่ ${widget.plotWeekIndex + 1}'),
+                        )
+                      ],
+                    ),
                   ),
-                  title: Text(
-                    'การดูแลรักษา',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          leading: FaIcon(
+                            FontAwesomeIcons.dotCircle,
+                            color: Color(0xFFF0972A),
+                          ),
+                          title: Text(
+                            'ป้องกัน/กำจัดศัตรูพืช',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 20),
+                          ),
+                          subtitle:
+                              Text('สัปดาห์ที่ ${widget.plotWeekIndex + 1}'),
+                        )
+                      ],
+                    ),
                   ),
-                  subtitle: Text('ประจำวันที่ xxx'),
-                )
-              ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          leading: FaIcon(
+                            FontAwesomeIcons.dotCircle,
+                            color: Color(0xFF776D60),
+                          ),
+                          title: Text(
+                            'การพยากรณ์',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 20),
+                          ),
+                          subtitle:
+                              Text('สัปดาห์ที่ ${widget.plotWeekIndex + 1}'),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          leading: FaIcon(
+                            FontAwesomeIcons.dotCircle,
+                            color: Color(0xFF4599E2),
+                          ),
+                          title: Text(
+                            'พิเศษ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 20),
+                          ),
+                          subtitle:
+                              Text('สัปดาห์ที่ ${widget.plotWeekIndex + 1}'),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                ListTile(
-                  leading: FaIcon(
-                    FontAwesomeIcons.dotCircle,
-                    color: Color(0xFFF0972A),
-                  ),
-                  title: Text(
-                    'ป้องกัน/กำจัดศัตรูพืช',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                  ),
-                  subtitle: Text('ประจำวันที่ xxx'),
-                )
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PlotInformation()));
+                    },
+                    child: Image.asset(
+                      'assets/image/button/more_plot_info_btn.png',
+                      scale: 1.1,
+                    )),
+                TextButton(
+                    onPressed: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => MarketplacePage()));
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => HomePageTabbar(
+                                    index: 2,
+                                  )),
+                          (route) => false);
+                    },
+                    child: Image.asset(
+                      'assets/image/button/find_production_factor_btn.png',
+                      scale: 1.1,
+                    ))
               ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  leading: FaIcon(
-                    FontAwesomeIcons.dotCircle,
-                    color: Color(0xFF776D60),
-                  ),
-                  title: Text(
-                    'การพยากรณ์',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                  ),
-                  subtitle: Text('ประจำวันที่ xxx'),
-                )
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PlotInformation()));
-                  },
-                  child: Image.asset(
-                    'assets/image/button/more_plot_info_btn.png',
-                    scale: 1.1,
-                  )),
-              TextButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => MarketplacePage()));
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => HomePageTabbar(
-                                  index: 2,
-                                )),
-                        (route) => false);
-                  },
-                  child: Image.asset(
-                    'assets/image/button/find_production_factor_btn.png',
-                    scale: 1.1,
-                  ))
-            ],
-          )
-        ],
-      ),
-    );
+            )
+          ],
+        ));
   }
 }

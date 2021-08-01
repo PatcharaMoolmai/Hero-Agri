@@ -10,8 +10,9 @@ import 'package:hero_agri/plot_action/my_plot_continuous.dart';
 import 'package:intl/intl.dart';
 
 class CustomizePlot extends StatefulWidget {
-  const CustomizePlot({Key key}) : super(key: key);
+  const CustomizePlot({Key key, this.plotIndex}) : super(key: key);
 
+  final int plotIndex;
   @override
   _CustomizePlotState createState() => _CustomizePlotState();
 }
@@ -151,7 +152,7 @@ class _CustomizePlotState extends State<CustomizePlot> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.all(10),
-                    child: plantDetail(),
+                    child: plantDetail(widget.plotIndex),
                   ),
                   SizedBox(
                     height: 20,
@@ -194,7 +195,16 @@ class _CustomizePlotState extends State<CustomizePlot> {
     );
   }
 
-  Widget plantDetail() {
+  Widget plantDetail(int index) {
+    // pic generator
+    String myPlotFruitImgList;
+    if (index % 3 == 0) {
+      myPlotFruitImgList = 'assets/icons/durian.png';
+    } else if (index % 3 == 1) {
+      myPlotFruitImgList = 'assets/icons/grapefruit-3.png';
+    } else if (index % 3 == 2) {
+      myPlotFruitImgList = 'assets/icons/longan.png';
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,13 +213,17 @@ class _CustomizePlotState extends State<CustomizePlot> {
           flex: 0,
           child: Container(
             width: 80,
-            child: TileCard(
-              child: FaIcon(
-                FontAwesomeIcons.appleAlt,
-                color: Colors.white,
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: Color(0xFF57BD37).withOpacity(0.5),
+              child: CircleAvatar(
+                radius: 28,
+                backgroundColor: Colors.white,
+                child: Image.asset(
+                  myPlotFruitImgList,
+                  scale: 12,
+                ),
               ),
-              elevation: 0,
-              color: Color(0xFF57BD37),
             ),
           ),
         ),
@@ -221,7 +235,7 @@ class _CustomizePlotState extends State<CustomizePlot> {
             Padding(
               padding: EdgeInsets.zero,
               child: Text(
-                'แปลงย่อยที่ 1',
+                'แปลงย่อยที่ ${widget.plotIndex + 1}',
                 style: TextStyle(
                     fontSize: 18,
                     color: Color(0xFF57BD37),
@@ -290,7 +304,7 @@ class _CustomizePlotState extends State<CustomizePlot> {
   }
 
   Widget activityTable() {
-    int count = 0;
+    int count = 52;
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
     return Container(
@@ -307,7 +321,7 @@ class _CustomizePlotState extends State<CustomizePlot> {
             },
             defaultVerticalAlignment: TableCellVerticalAlignment.middle,
             children: [
-              for (int i = 0; i < 52; i++)
+              for (int i = 0; i < count; i++)
                 TableRow(
                     decoration: BoxDecoration(
                       // week now!
@@ -316,6 +330,7 @@ class _CustomizePlotState extends State<CustomizePlot> {
                     children: [
                       TableCell(
                           child: Container(
+                        alignment: Alignment.center,
                         // This week check
                         child: Text(
                           'สัปดาห์ที่ ${i + 1}',
@@ -345,7 +360,10 @@ class _CustomizePlotState extends State<CustomizePlot> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  MyPlotManagement()));
+                                                  MyPlotManagement(
+                                                    plotIndex: widget.plotIndex,
+                                                    plotWeekIndex: i,
+                                                  )));
                                     },
                                   ))
                             ],
