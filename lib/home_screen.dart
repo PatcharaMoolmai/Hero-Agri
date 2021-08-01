@@ -294,7 +294,8 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'สัปดาห์ที่ ${activityList.indexOf(i) + 1} :',
+                                      // 'สัปดาห์ที่ ${activityList.indexOf(i) + 1} :',
+                                      'สัปดาห์ที่ 1 :',
                                       style: TextStyle(
                                         fontFamily: 'Anakotmai',
                                         fontWeight: FontWeight.w500,
